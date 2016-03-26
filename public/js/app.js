@@ -9,10 +9,10 @@ app.config(function($routeProvider) {
                controller: "registerController",
                templateUrl: "register.html"
             })
-            //.when("/contact/:contactId", {
-            //    controller: "EditContactController",
-            //    templateUrl: "contact.html"
-            //})
+            .when("/users", {
+               controller: "usersController",
+               templateUrl: "users.html"
+            })
             .otherwise({
                redirectTo: "/"
             });

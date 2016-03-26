@@ -13,6 +13,10 @@ app.get('/register', function (req, res) {
   res.sendFile(app.get('views') + '/register.html');
 });
 
+app.get('/users', function (req, res) {
+  res.sendFile(app.get('views') + '/users.html');
+});
+
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 
