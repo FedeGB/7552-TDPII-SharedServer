@@ -1,13 +1,14 @@
 {
-  "name": "SharedServer",
-  "version": "0.1",
-  "description": "75.52 - TP",
+  "name": "node-js-getting-started",
+  "version": "0.1.5",
+  "description": "A sample Node.js app using Express 4",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
+    "ejs": "2.3.3",
     "express": "4.13.3"
   },
   "engines": {
