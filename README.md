@@ -21,6 +21,7 @@ $ git push heroku master
 $ heroku open
 ```
 
-https://travis-ci.org/FedeGB/7552-TDPII-SharedServer.svg?branch=master
+![Build Status](https://travis-ci.org/FedeGB/7552-TDPII-SharedServer.svg?branch=master)
+
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
