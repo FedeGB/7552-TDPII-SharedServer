@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "./node_modules/mocha/bin/mocha",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha"
+    "test-travis": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha"
   },
   "dependencies": {
     "express": "4.13.3",
