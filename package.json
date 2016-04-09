@@ -1,6 +1,6 @@
 {
   "name": "SharedServer",
-  "version": "0.1",
+  "version": "5.8.0",
   "description": "75.52 - TP",
   "main": "index.js",
   "scripts": {
