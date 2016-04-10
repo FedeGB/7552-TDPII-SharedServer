@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 var path = __dirname + '/views';
+var pg = require('pg');
+
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
@@ -19,7 +21,6 @@ app.get('/users', function (req, res) {
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
-
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });

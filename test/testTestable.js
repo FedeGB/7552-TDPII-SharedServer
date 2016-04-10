@@ -3,7 +3,7 @@
  */
 var chai = require('chai');
 var expect = chai.expect;
-var CartSummary = require('./../testable.js');
+var CartSummary = require('./../app/testable.js');
 
 describe('Testable', function () {
     it('getSubTotal() should return 0', function () {
