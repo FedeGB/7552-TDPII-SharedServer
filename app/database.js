@@ -4,53 +4,54 @@
 
 var pg = require('pg');
 var path = require('path');
+var squel = require('squel');
 var connectionString = require(path.join(__dirname, 'config')).connectionString;
 
-var query = require('pg-query');
-query.connectionParameters = connectionString;
+var pgp = require('pg-promise')();
+var db = pgp(connectionString);
 
-query('Select * from test', function(err, rows, result) {
-    console.log(rows);
-});
-
+/*
+* Devuelve todos promises, por la naturaleza asincrónica de las consultas a DB
+* */
 module.exports = function () {
     var self = this;
-    self.client = query;
+    self.client = db;
 
-    /*
-    * Checkea que exista la tabla Users, sino la crea y añade usuarios por default
-    * */
-    self.init = function () {
-        self.client('Select * from Users', function(err, rows, result) {
-            if (err && err.error === 'error: relation "users" does not exist') {
-                createUsersTable();
-                return;
-            }
-            if (rows.length === 0) {
-                createDefaultUsers();
-                return;
-            }
-        });
+    self.getUsers = function () {
+        return self.client.func("getUsers");
     };
 
-    function createUsersTable() {
-        var query = 'create table Users ()';
-        self.client(query, function (err, rows, result) {
-            if (err) {
-                console.log(err.toString);
+    self.addUser = function (user) {
+        var userInsert = mapObjectToArray(user);
+        return self.client.func("addUser", userInsert);
+    };
+
+    self.getUserById = function (id) {
+        return self.client.func("getUser", [id]);
+    };
+
+    self.updateUser = function (user) {
+        var userUpdate = mapObjectToArray(user);
+        return self.client.func("updateUser", userUpdate);
+    };
+
+    self.deleteUser = function (id) {
+        return self.client.func("deleteUser", [id]);
+    };
+
+    function mapObjectToArray(obj) {
+        var arr = [];
+        for(var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (Array.isArray(obj[key])) {
+                    arr.push(obj[key].join('|'));
+                }
+                else {
+                    arr.push(obj[key]);
+                }
             }
-            else {
-                createUserRelatedTables();
-                createDefaultUsers();
-            }
-        })
-    }
+        }
 
-    function createUserRelatedTables() {
-
-    }
-
-    function createDefaultUsers() {
-
+        return arr;
     }
 }
