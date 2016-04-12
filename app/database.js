@@ -11,7 +11,7 @@ var pgp = require('pg-promise')();
 var db = pgp(connectionString);
 
 /*
-* Devuelve todos promises, por la naturaleza asincrónica de las consultas a DB
+* Devuelve todos promises
 * */
 module.exports = function () {
     var self = this;
@@ -23,6 +23,7 @@ module.exports = function () {
 
     self.addUser = function (user) {
         var userInsert = mapObjectToArray(user);
+        console.error(userInsert);
         return self.client.func("addUser", userInsert);
     };
 
@@ -37,6 +38,15 @@ module.exports = function () {
 
     self.deleteUser = function (id) {
         return self.client.func("deleteUser", [id]);
+    };
+
+    self.getInterests = function () {
+        return self.client.func("getInterests");
+    };
+
+    self.addInterest = function (interest) {
+        var interestInsert = mapObjectToArray(interest);
+        return self.client.func("addInterest", interestInsert);
     };
 
     function mapObjectToArray(obj) {

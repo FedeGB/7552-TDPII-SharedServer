@@ -36,6 +36,9 @@ describe('Database', function () {
         db.addUser(user).then(function (data) {
             expect(data[0]).to.have.property('adduser');
             done();
+        },
+        function (err) {
+            console.error(err);
         });
     });
 
@@ -87,6 +90,25 @@ describe('Database', function () {
                 done();
             });
         });
+    });
+
+    it('getInterests() should return all interests', function (done) {
+       db.getInterests().then(function (data) {
+           expect(data).to.have.length.of.at.least(4);
+           done();
+       });
+    });
+
+
+    it('addInterest(:interest) should create the interest successfully', function (done) {
+        var interest = {
+            name: 'Football',
+            categoryId: 3
+        };
+        db.addInterest(interest).then(function (data) {
+            expect(data[0]).to.have.property('addinterest');
+            done();
+        })
     });
 
 });

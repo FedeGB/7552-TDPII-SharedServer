@@ -132,3 +132,33 @@ BEGIN
 END; $$
 LANGUAGE 'plpgsql';
 
+-- getInterests
+CREATE OR REPLACE FUNCTION getInterests()
+RETURNS TABLE (
+	interestId bigint,
+	categoryId bigint,
+	interestName text,
+	categoryName text
+)
+AS $$
+BEGIN	
+	RETURN QUERY SELECT I.Id interestId, C.Id categoryId, I.Name interestName, C.Name categoryName
+	FROM Interests I
+	INNER JOIN Categories C ON I.categoryid = C.Id;
+END; $$
+LANGUAGE 'plpgsql';
+
+-- addInterest
+CREATE OR REPLACE FUNCTION addInterest(
+	nname text,
+	ncategoryId bigint
+)
+RETURNS NUMERIC
+AS $$
+BEGIN	
+	INSERT INTO Interests (Name, CategoryId) 
+	VALUES (nname, ncategoryid);
+	RETURN CURRVAL('interests_id_seq');
+
+END; $$
+LANGUAGE 'plpgsql';

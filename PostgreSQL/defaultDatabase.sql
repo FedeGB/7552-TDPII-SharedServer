@@ -1,18 +1,18 @@
 -- Insert default categories and interests
 INSERT INTO Categories (Name, SubcategoryId)
-VALUES ('Music', null);
+VALUES ('music', null);
 INSERT INTO Categories (Name, SubcategoryId)
-VALUES ('Band', 1);
+VALUES ('music/band', 1);
 INSERT INTO Categories (Name, SubcategoryId)
-VALUES ('Sport', null);
+VALUES ('sport', null);
 INSERT INTO Categories (Name, SubcategoryId)
-VALUES ('Sex', null);
+VALUES ('sex', null);
 INSERT INTO Categories (Name, SubcategoryId)
-VALUES ('Outdoors', null);
+VALUES ('outdoors', null);
 INSERT INTO Categories (Name, SubcategoryId)
-VALUES ('Travel', null);
+VALUES ('travel', null);
 INSERT INTO Categories (Name, SubcategoryId)
-VALUES ('Food', null);
+VALUES ('food', null);
 
 INSERT INTO Interests (CategoryId, Name)
 VALUES(4, 'Man');
