@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="255b287e-e744-4dad-a2db-8a4410e3912b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PostgreSQL/defaultDatabase.sql" afterPath="$PROJECT_DIR$/PostgreSQL/defaultDatabase.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PostgreSQL/storedProcedures.sql" afterPath="$PROJECT_DIR$/PostgreSQL/storedProcedures.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/database.js" afterPath="$PROJECT_DIR$/app/database.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/databaseTests.js" afterPath="$PROJECT_DIR$/test/databaseTests.js" />
     </list>
     <ignored path="7552-TDPII-SharedServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="database.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/database.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="737">
-              <caret line="48" column="63" selection-start-line="48" selection-start-column="63" selection-end-line="48" selection-end-column="63" />
+            <state relative-caret-position="306">
+              <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
               <folding>
                 <element signature="e#0#42#0" expanded="false" />
               </folding>
@@ -81,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="databaseTests.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="databaseTests.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/databaseTests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="92" selection-end-column="7" />
+            <state relative-caret-position="917">
+              <caret line="113" column="3" selection-start-line="113" selection-start-column="3" selection-end-line="113" selection-end-column="3" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -113,8 +109,8 @@
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/app/connection.js" />
         <option value="$PROJECT_DIR$/app/config.js" />
-        <option value="$PROJECT_DIR$/app/database.js" />
         <option value="$PROJECT_DIR$/test/databaseTests.js" />
+        <option value="$PROJECT_DIR$/app/database.js" />
       </list>
     </option>
   </component>
@@ -244,12 +240,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1460213768042</updated>
-      <workItem from="1460213769804" duration="37355000" />
+      <workItem from="1460213769804" duration="37749000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37355000" />
+    <option name="totallyTimeSpent" value="37749000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
@@ -379,22 +375,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/database.js">
+    <entry file="file://$PROJECT_DIR$/test/databaseTests.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="737">
-          <caret line="48" column="63" selection-start-line="48" selection-start-column="63" selection-end-line="48" selection-end-column="63" />
+        <state relative-caret-position="917">
+          <caret line="113" column="3" selection-start-line="113" selection-start-column="3" selection-end-line="113" selection-end-column="3" />
           <folding>
-            <element signature="e#0#42#0" expanded="false" />
+            <element signature="e#0#43#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/databaseTests.js">
+    <entry file="file://$PROJECT_DIR$/app/database.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="92" selection-end-column="7" />
+        <state relative-caret-position="306">
+          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
           <folding>
-            <element signature="e#0#43#0" expanded="false" />
+            <element signature="e#0#42#0" expanded="false" />
           </folding>
         </state>
       </provider>

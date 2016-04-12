@@ -23,7 +23,6 @@ module.exports = function () {
 
     self.addUser = function (user) {
         var userInsert = mapObjectToArray(user);
-        console.error(userInsert);
         return self.client.func("addUser", userInsert);
     };
 
