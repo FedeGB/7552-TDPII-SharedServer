@@ -30,6 +30,10 @@ module.exports = function () {
         return self.client.func("getUser", [id]);
     };
 
+    self.getUserInterests = function (id) {
+        return self.client.func("getUserInterests", [id]);
+    }
+
     self.updateUser = function (user) {
         var userUpdate = mapObjectToArray(user);
         return self.client.func("updateUser", userUpdate);
@@ -47,7 +51,7 @@ module.exports = function () {
         var interestInsert = mapObjectToArray(interest);
         return self.client.func("addInterest", interestInsert);
     };
-
+    
     function mapObjectToArray(obj) {
         var arr = [];
         for(var key in obj) {

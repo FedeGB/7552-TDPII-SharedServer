@@ -1,3 +1,10 @@
+-- Create aggregate function
+create aggregate array_agg_mult (anyarray) (
+	SFUNC     = array_cat
+   ,STYPE     = anyarray
+   ,INITCOND  = '{}'
+);
+
 -- getUsers
 CREATE OR REPLACE FUNCTION getUsers()
 RETURNS TABLE (
@@ -8,11 +15,16 @@ RETURNS TABLE (
 	email text,
 	sex char(1),
 	locationx real,
-	locationy real
+	locationy real,
+	interests text[]
 )
 AS $$
 BEGIN
-	RETURN QUERY SELECT u.*, l.locationX, l.locationY
+	RETURN QUERY SELECT u.*, l.locationX, l.locationY, (SELECT array_agg_mult(ARRAY[ARRAY[C.name, I.name]]) 
+		FROM USERINTEREsts UI 
+		inner join interests i on ui.interestid = i.id 
+		inner join categories c on i.categoryid = c.id 
+		where ui.userid = u.id) interests
 	FROM Users u
 	INNER JOIN Location l ON l.UserId = u.Id;
 END; $$
@@ -28,11 +40,16 @@ RETURNS TABLE (
 	email text,
 	sex char(1),
 	locationx real,
-	locationy real
+	locationy real,
+	interests text[]
 )
 AS $$
 BEGIN
-	RETURN QUERY SELECT u.*, l.locationX, l.locationY
+	RETURN QUERY SELECT u.*, l.locationX, l.locationY, (SELECT array_agg_mult(ARRAY[ARRAY[C.name, I.name]]) 
+		FROM USERINTEREsts UI 
+		inner join interests i on ui.interestid = i.id 
+		inner join categories c on i.categoryid = c.id 
+		where ui.userid = uId) interests
 	FROM Users u
 	INNER JOIN Location l ON l.UserId = u.Id
 	WHERE u.Id = uId;
@@ -162,3 +179,4 @@ BEGIN
 
 END; $$
 LANGUAGE 'plpgsql';
+
