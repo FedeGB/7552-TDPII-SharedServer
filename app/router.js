@@ -24,7 +24,7 @@ module.exports = function (app) {
         .post();
 
     router.route('/users/:id')
-        .get()
+        .get(usersCtrl.getUser)
         .put()
         .delete();
 

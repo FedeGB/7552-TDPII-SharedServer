@@ -72,4 +72,65 @@ describe('Users', function () {
                 });
         });
     });
+
+    describe('#getUser', function () {
+        it('should return a JSON with all the users', function (done) {
+            request(app)
+                .get('/users/' + 1)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(err).to.equal(null);
+                    done();
+                });
+        });
+
+        it('should return information of requested user', function (done) {
+            request(app)
+                .get('/users/' + 1)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(res.body.user.name).to.equal('Janeth Doe');
+                    done();
+                });
+        });
+
+        it('should return the fields specified in the requirement for the reply and each user', function (done) {
+            request(app)
+                .get('/users/' + 1)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(res.body).to.have.property('user');
+                    expect(res.body).to.have.property('metadata');
+                    expect(res.body.metadata).to.have.property('version');
+                    expect(res.body.user).to.have.property('name');
+                    expect(res.body.user).to.have.property('alias');
+                    expect(res.body.user).to.have.property('email');
+                    expect(res.body.user).to.have.property('sex');
+                    expect(res.body.user).to.have.property('photo_profile');
+                    expect(res.body.user).to.have.property('location');
+                    expect(res.body.user).to.have.property('interests');
+                    if (res.body.user.location) {
+                        expect(res.body.user.location).to.have.property('latitude');
+                        expect(res.body.user.location).to.have.property('longitude');
+                    }
+                    if (res.body.user.interests) {
+                        for (var j = 0; j < res.body.user.interests; j++) {
+                            var interest = res.body.user.interests[j];
+                            expect(interest).to.have.property('category');
+                            expect(interest).to.have.property('value');
+                        }
+                    }
+                    done();
+                });
+        });
+    });
 });

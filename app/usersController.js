@@ -22,6 +22,19 @@ module.exports = function () {
         });      
     };
 
+    self.getUser = function (req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        db.getUserById(req.params.id).then(function (data) {
+            var response = {
+                user: data.map(function (user) { return mapUser(user); })[0],
+                metadata: {
+                    version: "0.1"
+                }
+            };
+            res.send(JSON.stringify(response), null, 3);
+        });
+    };
+
     function mapUser(user) {
         var mappedUser = {};
         mappedUser.id = user.id;

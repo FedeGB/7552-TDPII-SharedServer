@@ -26,7 +26,6 @@ describe('Database', function () {
         it('should return an array of interests for each user', function (done) {
             db.getUsers().then(function (rows) {
                 var users = rows;
-                console.error(users[0]);
                 expect(users[0].interests).to.have.length.of.at.least(0);
                 done();
             });
