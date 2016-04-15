@@ -7,11 +7,7 @@ var expect = chai.expect;
 var Database = require('./../app/database.js');
 
 describe('Database', function () {
-    var db;
-
-    beforeEach(function () {
-        db = new Database();
-    });
+    var db = new Database();
 
     describe('#getUsers', function () {
         it('should return 4 or more users (at least the default ones)', function (done) {
@@ -42,7 +38,22 @@ describe('Database', function () {
                 sex: 'M',
                 locationx: 31.11111,
                 locationy: 32.22222,
-                interests: [1, 2, 3, 4]
+                interests: [{
+                    category: "sex",
+                    value: "man"
+                },
+                {
+                    category: "music/band",
+                    value: "pearl jam"
+                },
+                {
+                    category: "music/band",
+                    value: "radiohead"
+                },
+                {
+                    category: "outdoors",
+                    value: "running"
+                }]
             };
             db.addUser(user).then(function (data) {
                     expect(data[0]).to.have.property('adduser');
@@ -83,7 +94,22 @@ describe('Database', function () {
                 sex: 'M',
                 locationx: 31.11111,
                 locationy: 32.22222,
-                interests: [1, 2, 3, 4]
+                interests: [{
+                    category: "sex",
+                    value: "man"
+                },
+                {
+                    category: "music/band",
+                    value: "pearl jam"
+                },
+                {
+                    category: "music/band",
+                    value: "radiohead"
+                },
+                {
+                    category: "outdoors",
+                    value: "running"
+                }]
             };
             db.updateUser(user).then(function (rply) {
                 db.getUserById(2).then(function (data) {
@@ -105,7 +131,22 @@ describe('Database', function () {
                 sex: 'M',
                 locationx: 31.11111,
                 locationy: 32.22222,
-                interests: [1, 2, 3, 4]
+                interests: [{
+                    category: "sex",
+                    value: "man"
+                },
+                {
+                    category: "music/band",
+                    value: "pearl jam"
+                },
+                {
+                    category: "music/band",
+                    value: "radiohead"
+                },
+                {
+                    category: "outdoors",
+                    value: "running"
+                }]
             };
             db.addUser(user).then(function (data) {
                 expect(data[0]).to.have.property('adduser');
@@ -137,6 +178,40 @@ describe('Database', function () {
                 expect(data[0]).to.have.property('addinterest');
                 done();
             })
+        });
+    });
+
+    describe('#getUserByEmailOrAlias', function () {
+        it('should return a row if the email already exists', function (done) {
+            var user = { email: 'janedoe@gmail.com' };
+            db.getUserByEmailOrAlias(user).then(function (data) {
+                expect(data).to.have.length.of.at.least(1);
+                done();
+            });
+        });
+
+        it('should return a row if the alias already exists', function (done) {
+            var user = { alias: 'janedoe' };
+            db.getUserByEmailOrAlias(user).then(function (data) {
+                expect(data).to.have.length.of.at.least(1);
+                done();
+            });
+        });
+
+        it('should return a row if the email and alias already exist', function (done) {
+            var user = { email: 'janedoe@gmail.com', alias: 'janedoe' };
+            db.getUserByEmailOrAlias(user).then(function (data) {
+                expect(data).to.have.length.of.at.least(1);
+                done();
+            });
+        });
+
+        it('should return nothing if neither email nor alias exist yet', function (done) {
+            var user = { email: 'asdfasdf@gmail.com', alias: 'jefijefiej' };
+            db.getUserByEmailOrAlias(user).then(function (data) {
+                expect(data.length).to.equal(0);
+                done();
+            });
         });
     });
 });

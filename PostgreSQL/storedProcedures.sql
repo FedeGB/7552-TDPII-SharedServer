@@ -58,32 +58,38 @@ LANGUAGE 'plpgsql';
 
 -- addUser
 CREATE OR REPLACE FUNCTION addUser(
-	name text,
+	nname text,
 	alias text,
 	photoprofile bytea,
 	email text,
 	sex char(1),
 	locationx real,
 	locationy real,
-	interests text
+	interests text[]
 )
 RETURNS NUMERIC
 AS $$
 DECLARE uId bigint;
-DECLARE interestIds text[];
+DECLARE ninterestId bigint;
+DECLARE ncategoryId bigint;
+DECLARE ninterestName text;
+DECLARE ncategoryName text;
 BEGIN	
 	INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex) 
-	VALUES (name, alias, photoprofile, email, sex);
+	VALUES (nname, alias, photoprofile, email, sex);
 	SELECT CURRVAL('users_id_seq') INTO uId;
 
 	INSERT INTO Location (UserId, LocationX, LocationY)
 	VALUES (uId, locationx, locationy);
 
-	interestIds := string_to_array(interests, '|');
-	FOR i IN array_lower(interestIds, 1) .. array_upper(interestIds, 1) LOOP
-
+	FOR i IN array_lower(interests, 1) .. array_upper(interests, 1) LOOP
+		SELECT interests[i]::json->>'category' INTO ncategoryName;
+		SELECT interests[i]::json->>'value' INTO ninterestName;
+		SELECT Id INTO ncategoryId FROM Categories WHERE lower(Name) like lower(ncategoryName);
+		SELECT Id INTO ninterestId FROM Interests WHERE lower(Name) like lower(ninterestName) AND CategoryId = ncategoryId;
+		
 		INSERT INTO UserInterests (UserId, InterestId)
-		VALUES (uId, interestIds[i]::int);
+		VALUES (uId, ninterestId);
 
 	END LOOP;
 	RETURN uId;
@@ -101,11 +107,14 @@ CREATE OR REPLACE FUNCTION updateUser(
 	nsex char(1),
 	nlocationx real,
 	nlocationy real,
-	interests text
+	interests text[]
 )
 RETURNS NUMERIC
 AS $$
-DECLARE interestIds text[];
+DECLARE ninterestId bigint;
+DECLARE ncategoryId bigint;
+DECLARE ninterestName text;
+DECLARE ncategoryName text;
 BEGIN	
 	UPDATE Users
 	SET 	Name = nname,
@@ -121,11 +130,14 @@ BEGIN
 	WHERE UserId = uid;
 
 	DELETE FROM UserInterests WHERE UserId = uid;
-	interestIds := string_to_array(interests, '|');
-	FOR i IN array_lower(interestIds, 1) .. array_upper(interestIds, 1) LOOP
-
+	FOR i IN array_lower(interests, 1) .. array_upper(interests, 1) LOOP
+		SELECT interests[i]::json->>'category' INTO ncategoryName;
+		SELECT interests[i]::json->>'value' INTO ninterestName;
+		SELECT Id INTO ncategoryId FROM Categories WHERE lower(Name) like lower(ncategoryName);
+		SELECT Id INTO ninterestId FROM Interests WHERE lower(Name) like lower(ninterestName) AND CategoryId = ncategoryId;
+		
 		INSERT INTO UserInterests (UserId, InterestId)
-		VALUES (uId, interestIds[i]::int);
+		VALUES (uId, ninterestId);
 
 	END LOOP;
 	RETURN 1;

@@ -21,7 +21,7 @@ module.exports = function (app) {
 
     router.route('/users')
         .get(usersCtrl.getUsers)
-        .post();
+        .post(usersCtrl.addUser);
 
     router.route('/users/:id')
         .get(usersCtrl.getUser)

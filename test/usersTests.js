@@ -6,10 +6,11 @@ var chai = require('chai');
 var expect = chai.expect;
 var request = require('supertest');
 var app = require('../index');
+var msgs = require('../app/messages');
 
 describe('Users', function () {
     describe('#getUsers', function () {
-        it('should return a JSON with all the users', function (done) {
+        it('should return a JSON object with all the users', function (done) {
             request(app)
                 .get('/users')
                 .expect(200)
@@ -74,7 +75,7 @@ describe('Users', function () {
     });
 
     describe('#getUser', function () {
-        it('should return a JSON with all the users', function (done) {
+        it('should return a JSON object with all the users', function (done) {
             request(app)
                 .get('/users/' + 1)
                 .expect(200)
@@ -133,4 +134,339 @@ describe('Users', function () {
                 });
         });
     });
+
+    describe('#addUser', function () {
+        it('should return 201 on successful completion', function (done) {
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady',
+                    alias: 'tommyGOAT',
+                    photoProfile: null,
+                    email: 'tbrady@gmail.com',
+                    sex: 'M',
+                    location: { latitude: 31.11111, longitude: 32.22222 },
+                    interests: [{
+                        category: "sex",
+                        value: "man"
+                    },
+                    {
+                        category: "music/band",
+                        value: "pearl jam"
+                    },
+                    {
+                        category: "music/band",
+                        value: "radiohead"
+                    },
+                    {
+                        category: "outdoors",
+                        value: "running"
+                    }]}
+                })
+                .expect(201)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(err).to.equal(null);
+                    done();
+                });
+        });
+
+        it('should save the user fields correctly', function (done) {
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady2',
+                    alias: 'tommyGOAT2',
+                    photoProfile: null,
+                    email: 'tbrady2@gmail.com',
+                    sex: 'M',
+                    location: { latitude: 31.11111, longitude: 32.22222 },
+                    interests: [{
+                        category: "sex",
+                        value: "man"
+                    },
+                        {
+                            category: "music/band",
+                            value: "pearl jam"
+                        },
+                        {
+                            category: "music/band",
+                            value: "radiohead"
+                        },
+                        {
+                            category: "outdoors",
+                            value: "running"
+                        }]}
+                })
+                .expect(201)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(err).to.equal(null);
+                    expect(res.body.id).to.be.not.null;
+                    request(app)
+                        .get('/users/' + res.body.id)
+                        .expect(200)
+                        .end(function (err, res) {
+                            if (err) {
+                                return done(err);
+                            }
+                            expect(res.body.user.name).to.equal('Tom Brady2');
+                            expect(res.body.user.interests.length).to.equal(4);
+                            done();
+                        });
+                });
+        });
+
+        it('should save the user fields correctly', function (done) {
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady2',
+                    alias: 'tommyGOAT2',
+                    photoProfile: null,
+                    email: 'tbrady2@gmail.com',
+                    sex: 'M',
+                    location: { latitude: 31.11111, longitude: 32.22222 },
+                    interests: [{
+                        category: "sex",
+                        value: "man"
+                    },
+                        {
+                            category: "music/band",
+                            value: "pearl jam"
+                        },
+                        {
+                            category: "music/band",
+                            value: "radiohead"
+                        },
+                        {
+                            category: "outdoors",
+                            value: "running"
+                        }]}
+                })
+                .expect(201)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(err).to.equal(null);
+                    expect(res.body.id).to.be.not.null;
+                    request(app)
+                        .get('/users/' + res.body.id)
+                        .expect(200)
+                        .end(function (err, res) {
+                            if (err) {
+                                return done(err);
+                            }
+                            expect(res.body.user.name).to.equal('Tom Brady2');
+                            expect(res.body.user.interests.length).to.equal(4);
+                            done();
+                        });
+                });
+        });
+
+        it('should save the user with location (0,0) if no location is provided', function (done) {
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady3',
+                    alias: 'tommyGOAT3',
+                    photoProfile: null,
+                    email: 'tbrady3@gmail.com',
+                    sex: 'M',
+                    interests: [{
+                        category: "sex",
+                        value: "man"
+                    },
+                        {
+                            category: "music/band",
+                            value: "pearl jam"
+                        },
+                        {
+                            category: "music/band",
+                            value: "radiohead"
+                        },
+                        {
+                            category: "outdoors",
+                            value: "running"
+                        }]}
+                })
+                .expect(201)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(err).to.equal(null);
+                    expect(res.body.id).to.be.not.null;
+                    request(app)
+                        .get('/users/' + res.body.id)
+                        .expect(200)
+                        .end(function (err, res) {
+                            if (err) {
+                                return done(err);
+                            }
+                            expect(res.body.user.location.longitude).to.equal(0);
+                            expect(res.body.user.location.latitude).to.equal(0);
+                            done();
+                        });
+                });
+        });
+
+        it('should return an error if an interest/category doesn\'t exist', function (done) {
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady4',
+                    alias: 'tommyGOAT4',
+                    photoProfile: null,
+                    email: 'tbrady4@gmail.com',
+                    sex: 'M',
+                    interests: [{
+                        category: "oidfjosijdfoisjdf",
+                        value: "dfdfdfdfdf"
+                    },
+                        {
+                            category: "music/band",
+                            value: "pearl jam"
+                        },
+                        {
+                            category: "music/band",
+                            value: "radiohead"
+                        },
+                        {
+                            category: "outdoors",
+                            value: "running"
+                        }]}
+                })
+                .expect(500)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(err).to.equal(null);
+                    expect(res.body.error).to.equal(msgs.invalidCategoryMsg);
+                    done();
+                });
+        })
+
+        it('should return an error if the user email already exists', function (done) {
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady',
+                    alias: 'tommyGOATSE',
+                    photoProfile: null,
+                    email: 'janedoe@gmail.com',
+                    sex: 'M',
+                    interests: [{
+                        category: "sex",
+                        value: "man"
+                    },
+                        {
+                            category: "music/band",
+                            value: "pearl jam"
+                        },
+                        {
+                            category: "music/band",
+                            value: "radiohead"
+                        },
+                        {
+                            category: "outdoors",
+                            value: "running"
+                        }]}
+                })
+                .expect(500)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(res.body.error).to.equal(msgs.emailAlreadyExistsMsg);
+                    done();
+                });
+        });
+
+        it('should return an error if the user alias already exists', function (done) {
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady',
+                    alias: 'janedoe',
+                    photoProfile: null,
+                    email: 'tbrady222@gmail.com',
+                    sex: 'M',
+                    interests: [{
+                        category: "sex",
+                        value: "man"
+                    },
+                        {
+                            category: "music/band",
+                            value: "pearl jam"
+                        },
+                        {
+                            category: "music/band",
+                            value: "radiohead"
+                        },
+                        {
+                            category: "outdoors",
+                            value: "running"
+                        }]}
+                })
+                .expect(500)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(res.body.error).to.equal(msgs.aliasAlreadyExistsMsg);
+                    done();
+                });
+        });
+
+        it('should return an error if the user alias and email already exist', function (done) {
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady',
+                    alias: 'janedoe',
+                    photoProfile: null,
+                    email: 'janedoe@gmail.com',
+                    sex: 'M',
+                    interests: [{
+                        category: "sex",
+                        value: "man"
+                    },
+                        {
+                            category: "music/band",
+                            value: "pearl jam"
+                        },
+                        {
+                            category: "music/band",
+                            value: "radiohead"
+                        },
+                        {
+                            category: "outdoors",
+                            value: "running"
+                        }]}
+                })
+                .expect(500)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(res.body.error).to.equal(msgs.aliasAndEmailAlreadyExistMsg);
+                    done();
+                });
+        });
+    })
 });

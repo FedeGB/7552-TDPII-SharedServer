@@ -17,25 +17,36 @@ module.exports = function () {
     var self = this;
     self.client = db;
 
+    self.refresh = function () {
+        self.init();
+    };
+
     self.getUsers = function () {
         return self.client.func("getUsers");
     };
 
     self.addUser = function (user) {
-        var userInsert = mapObjectToArray(user);
+        var userInsert = mapUserObjectToArray(user);
         return self.client.func("addUser", userInsert);
     };
 
     self.getUserById = function (id) {
         return self.client.func("getUser", [id]);
     };
+    
+    self.getUserByEmailOrAlias = function (user) {
+        var query = squel.select()
+            .field('alias')
+            .field('email')
+            .from('users')
+            .where("alias = '" + user.alias + "' OR email = '" + user.email + "'")
+            .toString();
 
-    self.getUserInterests = function (id) {
-        return self.client.func("getUserInterests", [id]);
-    }
+        return self.client.query(query);
+    };
 
     self.updateUser = function (user) {
-        var userUpdate = mapObjectToArray(user);
+        var userUpdate = mapUserObjectToArray(user);
         return self.client.func("updateUser", userUpdate);
     };
 
@@ -48,16 +59,21 @@ module.exports = function () {
     };
 
     self.addInterest = function (interest) {
-        var interestInsert = mapObjectToArray(interest);
+        var interestInsert = mapUserObjectToArray(interest);
         return self.client.func("addInterest", interestInsert);
     };
-    
-    function mapObjectToArray(obj) {
+
+    function mapUserObjectToArray(obj) {
         var arr = [];
         for(var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 if (Array.isArray(obj[key])) {
-                    arr.push(obj[key].join('|'));
+                    var stringifiedArray = [];
+                    for (var i = 0; i < obj[key].length; i++) {
+                        var jsonObj = obj[key][i];
+                        stringifiedArray.push(JSON.stringify(jsonObj));
+                    }
+                    arr.push(stringifiedArray);
                 }
                 else {
                     arr.push(obj[key]);
@@ -67,4 +83,4 @@ module.exports = function () {
 
         return arr;
     }
-}
+};
