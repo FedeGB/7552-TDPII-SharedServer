@@ -23,7 +23,7 @@ module.exports = function () {
             res.send(JSON.stringify(response), null, 3);
         },
         function (err) {
-            res.send(500, err);
+            res.status(500).send(err);
         });
     };
 
@@ -45,13 +45,35 @@ module.exports = function () {
 
     self.addUser = function (req, res) {
         res.setHeader('Content-Type', 'application/json');
-        var userInsert = mapUserFromPost(req.body.user);
+        var userInsert = mapUserFromPostOrPut(req.body.user);
 
-        db.getUserByEmailOrAlias({ email: userInsert.email, alias: userInsert.alias }).then(function (data) {
+        handleAddAndUpdate(res, db.addUser, userInsert, false);
+    };
+
+    self.updateUser = function (req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        var userUpdate = mapUserFromPostOrPut(req.body.user);
+        if (userUpdate.id !== req.params.id.toString()) {
+            res.status(500).send({ error: msgs.paramsIdAndBodyIdDontMatch });
+        }
+        else {
+            handleAddAndUpdate(res, db.updateUser, userUpdate, true);
+        }
+    };
+
+    function handleAddAndUpdate(res, action, user, isUpdate) {
+        db.getUserByEmailOrAlias({email: user.email, alias: user.alias}).then(function (data) {
             if (data.length === 0) {
-                db.addUser(userInsert).then(function (data) {
-                    if (data[0].adduser) {
-                        res.status(201).send({id: data[0].adduser});
+                action(user).then(function (data) {
+                    if (isUpdate) {
+                        if (data[0].updateuser) {
+                            res.status(201).send({id: data[0].updateuser});
+                        }
+                    }
+                    else {
+                        if (data[0].adduser) {
+                            res.status(201).send({id: data[0].adduser});
+                        }
                     }
                 },
                 function (err) {
@@ -63,23 +85,28 @@ module.exports = function () {
                 });
             }
             else {
-                if (data[0].alias === userInsert.alias && data[0].email === userInsert.email) {
-                    res.status(500).send({ error: msgs.aliasAndEmailAlreadyExistMsg });
-                }
-                if (data[0].alias === userInsert.alias) {
-                    res.status(500).send({ error: msgs.aliasAlreadyExistsMsg });
-                }
-                if (data[0].email === userInsert.email) {
-                    res.status(500).send({ error: msgs.emailAlreadyExistsMsg });
-                }
-                res.status(500);
+                userAlreadyExistsResponse(data, user, res);
             }
         });
+    }
 
-    };
+    function userAlreadyExistsResponse(data, user, res) {
+        if (data[0].alias === user.alias && data[0].email === user.email) {
+            res.status(500).send({ error: msgs.aliasAndEmailAlreadyExistMsg });
+        }
+        if (data[0].alias === user.alias) {
+            res.status(500).send({ error: msgs.aliasAlreadyExistsMsg });
+        }
+        if (data[0].email === user.email) {
+            res.status(500).send({ error: msgs.emailAlreadyExistsMsg });
+        }
+    }
 
-    function mapUserFromPost(user) {
+    function mapUserFromPostOrPut(user) {
         var mappedUser = {};
+        if (user.id) {
+            mappedUser.id = user.id.toString();
+        }
         mappedUser.name = user.name;
         mappedUser.alias = user.alias;
         mappedUser.photo_profile = user.photoprofile;
