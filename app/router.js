@@ -26,7 +26,7 @@ module.exports = function (app) {
     router.route('/users/:id')
         .get(usersCtrl.getUser)
         .put(usersCtrl.updateUser)
-        .delete();
+        .delete(usersCtrl.deleteUser);
 
     router.route("/interests")
         .get()

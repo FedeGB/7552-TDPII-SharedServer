@@ -29,18 +29,25 @@ module.exports = function () {
 
     self.getUser = function (req, res) {
         res.setHeader('Content-Type', 'application/json');
-        db.getUserById(req.params.id).then(function (data) {
-            var response = {
-                user: data.map(function (user) { return mapUserFromGet(user); })[0],
-                metadata: {
-                    version: "0.1"
-                }
-            };
-            res.send(JSON.stringify(response), null, 3);
-        },
-        function (err) {
-            res.status(500).send(err);
-        });
+        if (isNaN(req.params.id)) {
+            res.status(500).send({ error: msgs.invalidId });
+        }
+        else {
+            db.getUserById(req.params.id).then(function (data) {
+                var response = {
+                    user: data.map(function (user) {
+                        return mapUserFromGet(user);
+                    })[0],
+                    metadata: {
+                        version: "0.1"
+                    }
+                };
+                res.send(JSON.stringify(response), null, 3);
+            },
+            function (err) {
+                res.status(500).send(err);
+            });
+        }
     };
 
     self.addUser = function (req, res) {
@@ -61,13 +68,32 @@ module.exports = function () {
         }
     };
 
+    self.deleteUser = function (req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        if (isNaN(req.params.id)) {
+            res.status(500).send({ error: msgs.invalidId });    
+        }
+        else {
+            db.deleteUser(req.params.id).then(function (data) {
+                if (data[0].deleteuser === "1") {
+                    res.status(200).send({ message: "OK" });
+                }
+                res.status(500).send({ message: "Error" });
+            },
+            function (err) {
+                res.status(500).send(err);
+            })
+        }
+        
+    };
+
     function handleAddAndUpdate(res, action, user, isUpdate) {
         db.getUserByEmailOrAlias({email: user.email, alias: user.alias}).then(function (data) {
             if (data.length === 0) {
                 action(user).then(function (data) {
                     if (isUpdate) {
                         if (data[0].updateuser) {
-                            res.status(201).send({id: data[0].updateuser});
+                            res.status(200).send({id: data[0].updateuser});
                         }
                     }
                     else {

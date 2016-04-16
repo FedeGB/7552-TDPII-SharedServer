@@ -75,7 +75,22 @@ describe('Users', function () {
     });
 
     describe('#getUser', function () {
-        it('should return a JSON object with all the users', function (done) {
+
+        it('should return an error if the provided Id is invalid', function (done) {
+            request(app)
+                .get('/users/' + 'sjdfidjfid')
+                .expect(500)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(err).to.equal(null);
+                    expect(res.body.error).to.equal(msgs.invalidId);
+                    done();
+                });
+        });
+
+        it('should return status 200 on successful completion', function (done) {
             request(app)
                 .get('/users/' + 1)
                 .expect(200)
@@ -97,6 +112,19 @@ describe('Users', function () {
                         return done(err);
                     }
                     expect(res.body.user.name).to.equal('Janeth Doe');
+                    done();
+                });
+        });
+
+        it('should return a null object if the user doesn\'t exist', function (done) {
+            request(app)
+                .get('/users/' + 1000000101010101)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(res.body.user).to.be.undefined;
                     done();
                 });
         });
@@ -134,7 +162,7 @@ describe('Users', function () {
                 });
         });
     });
-
+    
     describe('#addUser', function () {
         it('should return 201 on successful completion', function (done) {
             request(app)
@@ -173,7 +201,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should save the user fields correctly', function (done) {
             request(app)
                 .post('/users')
@@ -222,7 +250,7 @@ describe('Users', function () {
                         });
                 });
         });
-
+    
         it('should save the user with location (0,0) if no location is provided', function (done) {
             request(app)
                 .post('/users')
@@ -270,7 +298,7 @@ describe('Users', function () {
                         });
                 });
         });
-
+    
         it('should return an error if an interest/category doesn\'t exist', function (done) {
             request(app)
                 .post('/users')
@@ -308,7 +336,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user email already exists', function (done) {
             request(app)
                 .post('/users')
@@ -345,7 +373,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user alias already exists', function (done) {
             request(app)
                 .post('/users')
@@ -382,7 +410,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user alias and email already exist', function (done) {
             request(app)
                 .post('/users')
@@ -420,7 +448,7 @@ describe('Users', function () {
                 });
         });
     });
-
+    
     describe('#updateUser', function () {
         it('should return an error if the params Id and the body Id don\'t match', function (done) {
             request(app)
@@ -460,7 +488,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return 201 on successful completion', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -490,7 +518,7 @@ describe('Users', function () {
                             value: "running"
                         }]}
                 })
-                .expect(201)
+                .expect(200)
                 .end(function (err, res) {
                     if (err) {
                         return done(err);
@@ -499,7 +527,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should save the user fields correctly', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -529,7 +557,7 @@ describe('Users', function () {
                             value: "running"
                         }]}
                 })
-                .expect(201)
+                .expect(200)
                 .end(function (err, res) {
                     if (err) {
                         return done(err);
@@ -549,7 +577,7 @@ describe('Users', function () {
                         });
                 });
         });
-
+    
         it('should save the user with location (0,0) if no location is provided', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -578,7 +606,7 @@ describe('Users', function () {
                             value: "running"
                         }]}
                 })
-                .expect(201)
+                .expect(200)
                 .end(function (err, res) {
                     if (err) {
                         return done(err);
@@ -598,7 +626,7 @@ describe('Users', function () {
                         });
                 });
         });
-
+    
         it('should return an error if an interest/category doesn\'t exist', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -637,7 +665,8 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
+    
         it('should return an error if the user email already exists', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -675,7 +704,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user alias already exists', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -713,7 +742,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user alias and email already exist', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -751,5 +780,124 @@ describe('Users', function () {
                     done();
                 });
         });
-    })
+    });
+
+    describe('#deleteUser', function () {
+
+        it('should return an error if the provided Id is invalid', function (done) {
+            request(app)
+                .delete('/users/' + 'sjdfidjfid')
+                .expect(500)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(err).to.equal(null);
+                    expect(res.body.error).to.equal(msgs.invalidId);
+                    done();
+                });
+        });
+
+        it('should return 200 if the user was deleted successfully', function (done) {
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady',
+                    alias: 'fjdjfdjf',
+                    photoProfile: null,
+                    email: 'fjdjfdjf@gmail.com',
+                    sex: 'M',
+                    interests: [{
+                        category: "sex",
+                        value: "man"
+                    },
+                        {
+                            category: "music/band",
+                            value: "pearl jam"
+                        },
+                        {
+                            category: "music/band",
+                            value: "radiohead"
+                        },
+                        {
+                            category: "outdoors",
+                            value: "running"
+                        }]}
+                })
+                .expect(201)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    request(app)
+                        .delete('/users/' + res.body.id)
+                        .expect(200)
+                        .end(function (err, res) {
+                            if (err) {
+                                return done(err);
+                            }
+                            expect(err).to.equal(null);
+                            done();
+                        });
+                });
+        });
+
+        it('should delete the user from the database', function (done) {
+            var userId = 0;
+            request(app)
+                .post('/users')
+                .send({ user:
+                {
+                    name: 'Tom Brady',
+                    alias: 'fjdjfdjf',
+                    photoProfile: null,
+                    email: 'fjdjfdjf@gmail.com',
+                    sex: 'M',
+                    interests: [{
+                        category: "sex",
+                        value: "man"
+                    },
+                        {
+                            category: "music/band",
+                            value: "pearl jam"
+                        },
+                        {
+                            category: "music/band",
+                            value: "radiohead"
+                        },
+                        {
+                            category: "outdoors",
+                            value: "running"
+                        }]}
+                })
+                .expect(201)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    userId = res.body.id;
+                    request(app)
+                        .delete('/users/' + res.body.id)
+                        .expect(200)
+                        .end(function (err, res) {
+                            if (err) {
+                                return done(err);
+                            }
+                            expect(err).to.equal(null);
+                            request(app)
+                                .get('/users/' + userId)
+                                .expect(200)
+                                .end(function (err, res) {
+                                    if (err) {
+                                        return done(err);
+                                    }
+                                    expect(err).to.equal(null);
+                                    expect(res.body.user).to.be.undefined;
+                                    done();
+                                })
+                        });
+                });
+        });
+    });
 });
