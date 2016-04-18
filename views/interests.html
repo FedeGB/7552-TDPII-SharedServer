@@ -28,19 +28,9 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-</head>
-
-<body id="page-top" class="landingBody">
-
-    <nav-bar></nav-bar>
-
-    <div class="viewContainer" ng-view>
-	    
-    </div>
     <!-- jQuery -->
     <script src="js/tools/jquery.js"></script>
 
@@ -51,7 +41,7 @@
     <script src="js/tools/ui-bootstrap-tpls-1.2.5.min.js"></script>
 
     <script src="js/app.js"></script>
-    <script src="js/ctrls/indexController.js"></script>
+    <script src="js/ctrls/interestsController.js"></script>
     <script src="js/directives/loginDropDirective.js"></script>
     <script src="js/directives/navBarDirective.js"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -64,6 +54,15 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/tools/creative.js"></script>
 
-</body>
+</head>
 
+<body ng-controller="interestsController as interestsCtrl">
+
+<nav-bar></nav-bar>
+<div class="container">
+    <h1 class="page-header">Interests management</h1>
+    <p class="lead">Click an Category to see the available interests.</p>
+
+</div>
+</body>
 </html>

@@ -14,6 +14,10 @@ module.exports = function (app) {
         res.sendFile(app.get('views') + '/users.html');
     });
 
+    router.route('/interests.html').get(function (req, res) {
+        res.sendFile(app.get('views') + '/interests.html');
+    });
+
     router.route('/register.html').get(function (req, res) {
         res.sendFile(app.get('views') + '/register.html');
     });
