@@ -205,7 +205,7 @@ describe('Database', function () {
     describe('#addInterest', function () {
         it('should create the interest successfully', function (done) {
             var interest = {
-                name: 'Football',
+                name: 'Fusbal',
                 categoryId: 3
             };
             db.addInterest(interest).then(function (data) {
