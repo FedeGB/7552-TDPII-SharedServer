@@ -2,7 +2,9 @@
  * Created by bliberini on 4/14/16.
  */
 var express = require('express');
-var usersCtrl = require('./usersController')();
+var usersCtrl = require('./../controllers/usersController')();
+var interestsCtrl = require('./../controllers/interestsController')();
+
 module.exports = function (app) {
     'use strict';
     var router =  express.Router();
@@ -29,7 +31,7 @@ module.exports = function (app) {
         .delete(usersCtrl.deleteUser);
 
     router.route("/interests")
-        .get()
-        .post();
+        .get(interestsCtrl.getInterests)
+        .post(interestsCtrl.addInterest);
     return router;
 };

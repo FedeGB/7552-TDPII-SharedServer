@@ -6,7 +6,7 @@ var chai = require('chai');
 var expect = chai.expect;
 var request = require('supertest');
 var app = require('../index');
-var msgs = require('../app/messages');
+var msgs = require('../app/helpers/messages');
 
 describe('Users', function () {
     describe('#getUsers', function () {
@@ -162,7 +162,7 @@ describe('Users', function () {
                 });
         });
     });
-    
+
     describe('#addUser', function () {
         it('should return 201 on successful completion', function (done) {
             request(app)
@@ -201,7 +201,7 @@ describe('Users', function () {
                     done();
                 });
         });
-    
+
         it('should save the user fields correctly', function (done) {
             request(app)
                 .post('/users')
@@ -250,7 +250,7 @@ describe('Users', function () {
                         });
                 });
         });
-    
+
         it('should save the user with location (0,0) if no location is provided', function (done) {
             request(app)
                 .post('/users')
@@ -298,7 +298,7 @@ describe('Users', function () {
                         });
                 });
         });
-    
+
         it('should return an error if an interest/category doesn\'t exist', function (done) {
             request(app)
                 .post('/users')
@@ -336,7 +336,7 @@ describe('Users', function () {
                     done();
                 });
         });
-    
+
         it('should return an error if the user email already exists', function (done) {
             request(app)
                 .post('/users')
@@ -373,7 +373,7 @@ describe('Users', function () {
                     done();
                 });
         });
-    
+
         it('should return an error if the user alias already exists', function (done) {
             request(app)
                 .post('/users')
@@ -410,7 +410,7 @@ describe('Users', function () {
                     done();
                 });
         });
-    
+
         it('should return an error if the user alias and email already exist', function (done) {
             request(app)
                 .post('/users')
@@ -448,7 +448,7 @@ describe('Users', function () {
                 });
         });
     });
-    
+
     describe('#updateUser', function () {
         it('should return an error if the params Id and the body Id don\'t match', function (done) {
             request(app)
@@ -488,7 +488,7 @@ describe('Users', function () {
                     done();
                 });
         });
-    
+
         it('should return 201 on successful completion', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -527,7 +527,7 @@ describe('Users', function () {
                     done();
                 });
         });
-    
+
         it('should save the user fields correctly', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -577,7 +577,7 @@ describe('Users', function () {
                         });
                 });
         });
-    
+
         it('should save the user with location (0,0) if no location is provided', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -626,7 +626,7 @@ describe('Users', function () {
                         });
                 });
         });
-    
+
         it('should return an error if an interest/category doesn\'t exist', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -665,8 +665,8 @@ describe('Users', function () {
                     done();
                 });
         });
-    
-    
+
+
         it('should return an error if the user email already exists', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -704,7 +704,7 @@ describe('Users', function () {
                     done();
                 });
         });
-    
+
         it('should return an error if the user alias already exists', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -742,7 +742,7 @@ describe('Users', function () {
                     done();
                 });
         });
-    
+
         it('should return an error if the user alias and email already exist', function (done) {
             request(app)
                 .put('/users/' + 2)

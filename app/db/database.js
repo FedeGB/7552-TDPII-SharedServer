@@ -5,7 +5,7 @@
 var pg = require('pg');
 var path = require('path');
 var squel = require('squel');
-var connectionString = require(path.join(__dirname, 'config')).connectionString;
+var connectionString = require('./../config/config').connectionString;
 
 var pgp = require('pg-promise')();
 var db = pgp(connectionString);
@@ -56,6 +56,16 @@ module.exports = function () {
 
     self.getInterests = function () {
         return self.client.func("getInterests");
+    };
+
+    self.getInterestByNameAndCategory = function (interest) {
+        var query = squel.select()
+            .from('interests')
+            .join('categories', null, 'categories.id = interests.categoryid')
+            .where("lower(interests.name) = '" + interest.name.toLowerCase() + "' AND lower(categories.name) = '" + interest.category.toLowerCase() + "'")
+            .toString();
+
+        return self.client.query(query);
     };
 
     self.addInterest = function (interest) {

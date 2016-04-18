@@ -1,9 +1,9 @@
 /**
  * Created by bliberini on 4/14/16.
  */
-var Database = require('./database');
+var Database = require('./../db/database');
 var db = new Database();
-var msgs = require('./messages');
+var msgs = require('./../helpers/messages');
 
 module.exports = function () {
     var self = this;

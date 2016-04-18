@@ -9,5 +9,8 @@ module.exports = {
     aliasAndEmailAlreadyExistMsg: 'A user with the provided alias and email already exists',
     paramsIdAndBodyIdDontMatch: 'Id provided in the URL params and the one provided in the request\'s body don\'t match',
     errorCannotPut: 'Error: cannot PUT /users/',
-    invalidId: 'The provided ID isn\'t valid'
+    invalidId: 'The provided ID isn\'t valid',
+    interestAlreadyExists: 'An interest with the same name already exists',
+    invalidCategoryNamePSQL: 'error: null value in column "categoryid" violates not-null constraint',
+    invalidCategoryName: 'Category name doesn\'t exist'
 };

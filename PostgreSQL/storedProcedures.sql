@@ -180,13 +180,16 @@ LANGUAGE 'plpgsql';
 -- addInterest
 CREATE OR REPLACE FUNCTION addInterest(
 	nname text,
-	ncategoryId bigint
+	ncategoryname text
 )
 RETURNS NUMERIC
 AS $$
+DECLARE ncategoryId bigint;
 BEGIN	
+	SELECT Id INTO ncategoryId FROM Categories WHERE Name like ncategoryname;
+	
 	INSERT INTO Interests (Name, CategoryId) 
-	VALUES (nname, ncategoryid);
+	VALUES (nname, ncategoryId);
 	RETURN CURRVAL('interests_id_seq');
 
 END; $$
