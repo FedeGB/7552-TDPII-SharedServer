@@ -17,9 +17,9 @@ describe('Database', function () {
                 expect(users).to.have.length.of.at.least(4);
                 done();
             });
-    
+
         });
-    
+
         it('should return an array of interests for each user', function (done) {
             db.getUsers().then(function (rows) {
                 var users = rows;
@@ -67,11 +67,11 @@ describe('Database', function () {
                     function (err) {
                         console.error(err);
                     });
-    
+
             });
         });
     });
-    
+
     describe('#getUser', function () {
         it('should return the requested user', function (done) {
             db.getUserById(1).then(function (data) {
@@ -80,16 +80,16 @@ describe('Database', function () {
                 done();
             });
         });
-    
+
         it('should return an array of interests for the user', function (done) {
-            db.getUserById(224).then(function (data) {
+            db.getUserById(1).then(function (data) {
                 var row = data[0];
                 expect(row.interests).to.have.length.of.at.least(0);
                 done();
             });
         });
     });
-    
+
     describe('#updateUser', function () {
         it('should update the user successfully', function (done) {
             var user = {
@@ -127,7 +127,7 @@ describe('Database', function () {
             });
         });
     });
-    
+
     describe('#deleteUser', function () {
         it('should delete the user successfully', function (done) {
             var user = {
@@ -165,7 +165,7 @@ describe('Database', function () {
             });
         });
     });
-    
+
     describe('#getInterests', function () {
         it('should return all interests', function (done) {
             db.getInterests().then(function (data) {
@@ -174,34 +174,34 @@ describe('Database', function () {
             });
         });
     });
-    
+
     describe('#getInterestByNameAndCategory', function () {
         it('should return an interest if it exists', function (done) {
-            db.getInterestByNameAndCategory({ name: "Man", categoryName: "Sex" }).then(function (data) {
+            db.getInterestByNameAndCategory({ name: "Man", category: "Sex" }).then(function (data) {
                 expect(data).to.not.be.undefined;
                 expect(data).to.have.length.of.at.least(1);
                 done();
             });
         });
-    
+
         it('should return nothing if the interest doesn\'t exist', function (done) {
-            db.getInterestByNameAndCategory({ name: "Gingers", categoryName: "Sex" }).then(function (data) {
+            db.getInterestByNameAndCategory({ name: "Gingers", category: "Sex" }).then(function (data) {
                 expect(data).to.not.be.undefined;
                 expect(data.length).to.equal(0);
                 done();
             });
         });
-    
+
         it('should return nothing if the interest exists, but not for that category', function (done) {
-            db.getInterestByNameAndCategory({ name: "football", categoryName: "Sex" }).then(function (data) {
+            db.getInterestByNameAndCategory({ name: "football", category: "Sex" }).then(function (data) {
                 expect(data).to.not.be.undefined;
                 expect(data.length).to.equal(0);
                 done();
             });
         });
     });
-    
-    
+
+
     describe('#addInterest', function () {
         it('should create the interest successfully', function (done) {
             var interest = {
@@ -214,7 +214,7 @@ describe('Database', function () {
             })
         });
     });
-    
+
     describe('#getUserByEmailOrAlias', function () {
         it('should return a row if the email already exists', function (done) {
             var user = { email: 'janedoe@gmail.com' };
@@ -223,7 +223,7 @@ describe('Database', function () {
                 done();
             });
         });
-    
+
         it('should return a row if the alias already exists', function (done) {
             var user = { alias: 'janedoe' };
             db.getUserByEmailOrAlias(user).then(function (data) {
@@ -231,7 +231,7 @@ describe('Database', function () {
                 done();
             });
         });
-    
+
         it('should return a row if the email and alias already exist', function (done) {
             var user = { email: 'janedoe@gmail.com', alias: 'janedoe' };
             db.getUserByEmailOrAlias(user).then(function (data) {
@@ -239,7 +239,7 @@ describe('Database', function () {
                 done();
             });
         });
-    
+
         it('should return nothing if neither email nor alias exist yet', function (done) {
             var user = { email: 'asdfasdf@gmail.com', alias: 'jefijefiej' };
             db.getUserByEmailOrAlias(user).then(function (data) {
@@ -248,7 +248,7 @@ describe('Database', function () {
             });
         });
     });
-    
+
     describe('#updatePhoto', function () {
         it('should return no error on successful completion', function (done) {
             base64.base64encoder(__dirname + '/../public/img/imagetest.jpg', { localFile: true, string: true }, function (err, image) {
