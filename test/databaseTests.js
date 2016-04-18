@@ -206,7 +206,7 @@ describe('Database', function () {
         it('should create the interest successfully', function (done) {
             var interest = {
                 name: 'Fusbal',
-                categoryId: 3
+                category: 'Sport'
             };
             db.addInterest(interest).then(function (data) {
                 expect(data[0]).to.have.property('addinterest');
