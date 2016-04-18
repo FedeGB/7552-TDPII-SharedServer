@@ -65,7 +65,7 @@ describe('Photos', function () {
                            .end(function (err, res) {
                                if (err) {
                                    return done(err);
-                               }    
+                               }
                                expect(err).to.equal(null);
                                expect(res.body.user.photo_profile).to.equal(image);
                                done();
