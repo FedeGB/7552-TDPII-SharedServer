@@ -11,7 +11,7 @@ RETURNS TABLE (
 	id bigint,
 	name text,
 	alias text,
-	photoprofile bytea,
+	photoprofile text,
 	email text,
 	sex char(1),
 	locationx real,
@@ -36,7 +36,7 @@ RETURNS TABLE (
 	id bigint,
 	name text,
 	alias text,
-	photoprofile bytea,
+	photoprofile text,
 	email text,
 	sex char(1),
 	locationx real,
@@ -60,7 +60,7 @@ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION addUser(
 	nname text,
 	alias text,
-	photoprofile bytea,
+	photoprofile text,
 	email text,
 	sex char(1),
 	locationx real,
@@ -102,7 +102,7 @@ CREATE OR REPLACE FUNCTION updateUser(
 	uid bigint,
 	nname text,
 	nalias text,
-	nphotoprofile bytea,
+	nphotoprofile text,
 	nemail text,
 	nsex char(1),
 	nlocationx real,
@@ -191,6 +191,22 @@ BEGIN
 	INSERT INTO Interests (Name, CategoryId) 
 	VALUES (nname, ncategoryId);
 	RETURN CURRVAL('interests_id_seq');
+
+END; $$
+LANGUAGE 'plpgsql';
+
+-- updatePhoto
+CREATE OR REPLACE FUNCTION updatePhoto(
+	uId bigint,
+	photo text
+)
+RETURNS NUMERIC
+AS $$
+BEGIN	
+	UPDATE Users
+	SET photoprofile = photo
+	WHERE Id = uId;
+	RETURN 1;
 
 END; $$
 LANGUAGE 'plpgsql';

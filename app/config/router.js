@@ -4,6 +4,7 @@
 var express = require('express');
 var usersCtrl = require('./../controllers/usersController')();
 var interestsCtrl = require('./../controllers/interestsController')();
+var photoCtrl = require('./../controllers/photoController')();
 
 module.exports = function (app) {
     'use strict';
@@ -29,6 +30,9 @@ module.exports = function (app) {
         .get(usersCtrl.getUser)
         .put(usersCtrl.updateUser)
         .delete(usersCtrl.deleteUser);
+
+    router.route('/users/:id/photo')
+        .put(photoCtrl.updatePhoto);
 
     router.route("/interests")
         .get(interestsCtrl.getInterests)

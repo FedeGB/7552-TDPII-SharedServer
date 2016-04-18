@@ -26,7 +26,7 @@ module.exports = function () {
     };
 
     self.addUser = function (user) {
-        var userInsert = mapUserObjectToArray(user);
+        var userInsert = mapObjectToArray(user);
         return self.client.func("addUser", userInsert);
     };
 
@@ -46,7 +46,7 @@ module.exports = function () {
     };
 
     self.updateUser = function (user) {
-        var userUpdate = mapUserObjectToArray(user);
+        var userUpdate = mapObjectToArray(user);
         return self.client.func("updateUser", userUpdate);
     };
 
@@ -69,11 +69,16 @@ module.exports = function () {
     };
 
     self.addInterest = function (interest) {
-        var interestInsert = mapUserObjectToArray(interest);
+        var interestInsert = mapObjectToArray(interest);
         return self.client.func("addInterest", interestInsert);
     };
 
-    function mapUserObjectToArray(obj) {
+    self.updatePhoto = function (userId, photo) {
+        var photoUpdate = mapObjectToArray({ id: userId, photo: photo });
+        return self.client.func("updatePhoto", photoUpdate);
+    };
+
+    function mapObjectToArray(obj) {
         var arr = [];
         for(var key in obj) {
             if (obj.hasOwnProperty(key)) {

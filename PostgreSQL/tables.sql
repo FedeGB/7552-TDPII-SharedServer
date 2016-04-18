@@ -2,7 +2,7 @@ CREATE TABLE Users (
 	Id bigserial PRIMARY KEY, 
 	Name text NOT NULL, 
 	Alias text NOT NULL, 
-	PhotoProfile bytea, 
+	PhotoProfile text, 
 	Email text NOT NULL, 
 	Sex char NOT NULL
 );
