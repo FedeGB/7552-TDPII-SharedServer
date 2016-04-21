@@ -589,3 +589,11 @@ body {
     webkit-tap-highlight-color: #222;
     background-image: url(../img/header.jpg);
 }
+
+label.info {
+    font-weight: 100;
+}
+
+.info-container {
+    margin-bottom: 15px;
+}
