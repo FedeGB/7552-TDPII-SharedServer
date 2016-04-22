@@ -5,7 +5,8 @@
     'use strict';
     app.factory('dbService', ['$http', function ($http) {
         return {
-            getUsers: getUsers
+            getUsers: getUsers,
+            getInterests: getInterests
         };
         
         function getUsers() {
@@ -13,6 +14,13 @@
                 method: 'GET',
                 url: '/users'
             });
+        }
+
+        function getInterests() {
+            return $http({
+                method: 'GET',
+                url: '/interests'
+            })
         }
     }]);
 })();

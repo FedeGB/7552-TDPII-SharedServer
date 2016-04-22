@@ -37,9 +37,11 @@
     <!-- AngularJS -->
 
     <script src="js/tools/angular.min.js"></script>
+    <script src="js/tools/angular-base64-upload.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/ctrls/registerController.js"></script>
+    <script src="js/services/dbService.js"></script>
+    <script src="js/ctrls/userController.js"></script>
     <script src="js/directives/loginDropDirective.js"></script>
     <script src="js/directives/navBarDirective.js"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -55,14 +57,14 @@
 
 </head>
 
-<body id="page-top" ng-controller="registerController as registerCtrl">
+<body id="page-top" ng-controller="userController as userCtrl">
 
     <nav-bar></nav-bar>
     <div class="container">
         <h1 class="well">Registration Form</h1>
         <div class="col-lg-12 well">
             <div class="row">
-                <form>
+                <form name="form">
                     <div class="col-sm-12">
                         <fieldset>
                             <div id="legend">
@@ -71,21 +73,49 @@
                             <div class="row">
                                 <div class="col-sm-6 form-group">
                                     <label>Name</label>
-                                    <input type="text" placeholder="Enter Name Here" class="form-control">
+                                    <div class="form-group"
+                                         ng-class="{'has-error': form.name.$touched && form.name.$error.required,
+                                                    'has-feedback': form.name.$touched && form.name.$error.required }">
+                                        <input type="text" name="name" ng-model="userCtrl.user.name" placeholder="Enter Name Here" class="form-control" required>
+                                        <label class="control-label" ng-show="form.name.$touched && form.name.$error.required">This field is mandatory</label>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 form-group">
                                     <label>Username</label>
-                                    <input type="text" placeholder="Enter Username Here" class="form-control">
+                                    <div class="form-group"
+                                         ng-class="{'has-error': form.alias.$touched && form.alias.$error.required,
+                                                    'has-feedback': form.alias.$touched && form.alias.$error.required }">
+                                        <input type="text" name="alias" ng-model="userCtrl.user.alias" placeholder="Enter Username Here" class="form-control" required>
+                                        <label class="control-label" ng-show="form.alias.$touched && form.alias.$error.required">This field is mandatory</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 form-group">
                                     <label>Email</label>
-                                    <input type="email" placeholder="email@server.com" class="form-control">
+                                    <div class="form-group"
+                                         ng-class="{'has-error': form.email.$touched && form.email.$error,
+                                                    'has-feedback': form.email.$touched && form.email.$error}">
+                                        <input type="email" name="email" ng-model="userCtrl.user.email" placeholder="email@server.com" class="form-control" required>
+                                        <label class="control-label" ng-show="form.email.$touched && form.email.$error.required">This field is mandatory</label>
+                                        <label class="control-label" ng-show="form.email.$touched && form.email.$error.email">Invalid email</label>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 form-group">
-                                    <label>Confirm Email</label>
-                                    <input type="email" placeholder="email@server.com" class="form-control">
+                                    <label>Sex</label>
+                                    <div>
+                                        <select ng-model="userCtrl.user.sex" required   class="form-control">
+                                            <option value="M" selected>Male</option>
+                                            <option value="F">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-10 form-group">
+                                    <label>Photo Profile</label>
+                                    <input type='file' ng-model='userCtrl.user.photo_profile' base-sixty-four-input>
+                                    <img data-ng-src="data:image/png;base64,{{userCtrl.user.photo_profile}}" ng-if="userCtrl.user.photo_profile !== null" class="pull-left img-circle">
                                 </div>
                             </div>
                         </fieldset>
@@ -94,17 +124,14 @@
                                 <legend class="">Interests</legend>
                             </div>
                             <uib-accordion>
-                                <uib-accordion-group ng-repeat="category in registerCtrl.categories" heading="{{category}}">
-                                    <p>The body of the uib-accordion group grows to fit the contents</p>
-                                    <input class="basicInput" type="text" id="interest"/>
-                                    <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-                                    <div ng-repeat="interest in registerCtrl.interests | filter: { category: category }">
+                                <uib-accordion-group ng-repeat="category in userCtrl.categories" heading="{{category}}">
+                                    <div ng-repeat="interest in userCtrl.interests | filter: { category: category }">
                                         <input type="checkbox" value="{{interest.value}}" /> {{interest.value}}
                                     </div>
                                 </uib-accordion-group>
                             </uib-accordion>
                         </fieldset>
-                        <button type="button" class="btn btn-lg btn-info">Submit</button>
+                        <button type="button" class="btn btn-lg btn-info" ng-click="userCtrl.submit()" ng-disabled="!form.$valid">Submit</button>
                     </div>
                 </form>
             </div>
