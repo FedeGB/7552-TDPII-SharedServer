@@ -1,4 +1,4 @@
-var app = angular.module("matchApp", ['ngRoute', 'ui.bootstrap', 'naif.base64']);
+var app = angular.module("matchApp", ['ngRoute', 'ngMaterial', 'ui.bootstrap', 'naif.base64']);
 app.config(function($routeProvider) {
 	 $routeProvider
             .when("/", {

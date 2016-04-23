@@ -597,3 +597,7 @@ label.info {
 .info-container {
     margin-bottom: 15px;
 }
+
+#submitButton{
+    margin-top: 15px;
+}

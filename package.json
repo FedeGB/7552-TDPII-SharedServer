@@ -9,7 +9,13 @@
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha"
   },
   "dependencies": {
+    "angular": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "angular-aria": "^1.5.5",
     "angular-base64-upload": "^0.1.19",
+    "angular-material": "^1.0.7",
+    "angular-messages": "^1.5.5",
+    "angular-route": "^1.5.5",
     "body-parser": "^1.15.0",
     "express": "4.13.3",
     "mocha": "^2.2.0",

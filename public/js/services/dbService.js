@@ -6,7 +6,8 @@
     app.factory('dbService', ['$http', function ($http) {
         return {
             getUsers: getUsers,
-            getInterests: getInterests
+            getInterests: getInterests,
+            addUser: addUser
         };
         
         function getUsers() {
@@ -21,6 +22,14 @@
                 method: 'GET',
                 url: '/interests'
             })
+        }
+
+        function addUser(user) {
+            return $http({
+                method: 'POST',
+                url: '/users',
+                data: { user: user }
+            });
         }
     }]);
 })();
