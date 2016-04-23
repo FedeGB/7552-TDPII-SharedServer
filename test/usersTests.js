@@ -905,8 +905,7 @@ describe('Users', function () {
 
         it('should return status 200 on successful completion', function (done) {
             request(app)
-                .get('/users/getByUsername')
-                .send({ username: 'janedoe' })
+                .get('/users/getByUsername?username=janedoe')
                 .expect(200)
                 .end(function (err, res) {
                     if (err) {
@@ -919,14 +918,13 @@ describe('Users', function () {
 
         it('should return information of requested user', function (done) {
             request(app)
-                .get('/users/getByUsername')
-                .send({ username: 'janedoe' })
+                .get('/users/getByUsername?username=janedoe')
                 .expect(200)
                 .end(function (err, res) {
                     if (err) {
                         return done(err);
                     }
-                    expect(res.body.user.id).to.not.be.undefined;
+                    expect(res.body.id).to.not.be.undefined;
                     done();
                 });
         });

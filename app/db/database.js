@@ -42,7 +42,7 @@ module.exports = function () {
             .from('users')
             .where("(alias = '" + user.alias + "' OR email = '" + user.email + "') AND id <> " + (user.id ? user.id : 0))
             .toString();
-
+        
         return self.client.query(query);
     };
 
