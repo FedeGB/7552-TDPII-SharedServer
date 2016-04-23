@@ -8,7 +8,8 @@
             getUsers: getUsers,
             getInterests: getInterests,
             addUser: addUser,
-            addInterest: addInterest
+            addInterest: addInterest,
+            deleteUser: deleteUser
         };
         
         function getUsers() {
@@ -38,6 +39,13 @@
                 method: 'POST',
                 url: '/interests',
                 data: { interest: interest }
+            });
+        }
+
+        function deleteUser(userId) {
+            return $http({
+                method: 'DELETE',
+                url: '/users/' + userId
             });
         }
     }]);

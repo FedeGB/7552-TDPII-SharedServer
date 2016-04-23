@@ -13,6 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/angular-material.min.css" type="text/css">
 
     <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -67,82 +68,93 @@
     <nav-bar></nav-bar>
     <div class="container">
         <h1 class="page-header">User management</h1>
-        <p class="lead">Click an user name to see more details.</p>
-        <div class="row">
-            <div id="users-management" class="col-md-8">
-                <div class="panel-group" id="accordion">
+        <div id="userManagement">
+            <p class="lead">Click an user name to see more details.</p>
+            <div class="row">
+                <div id="users-management" class="col-md-8">
+                    <div class="panel-group" id="accordion">
 
-                    <div class="panel panel-default" ng-repeat="user in usersCtrl.users">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapse-{{user.id}}">
-                                    {{user.name}} <small>({{user.alias}})</small>
-                                </a>
-                                <div class="btn-group pull-right"><a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i><span> Edit</span></a><a href="#" class="btn btn-danger"><i class="fa fa-times"></i><span> Remove</span></a></div>
-                            </h4>
-                        </div>
-                        <div id="collapse-{{user.id}}" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <img data-ng-src="data:image/png;base64,{{user.photo_profile}}" ng-if="user.photo_profile !== null" class="pull-left img-circle">
-                                <fieldset>
-                                    <div id="legend">
-                                        <legend class="">Personal Data</legend>
+                        <div class="panel panel-default" ng-repeat="user in usersCtrl.users">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapse-{{user.id}}">
+                                        {{user.name}} <small>({{user.alias}})</small>
+                                    </a>
+                                    <div class="btn-group pull-right">
+                                        <a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i><span> Edit</span></a>
+                                        <a ng-click="user.deleting || usersCtrl.delete(user)" class="btn btn-danger has-spinner" ng-disabled="user.deleting">
+                                            <span class="spinner">
+                                                <i ng-if="!user.deleting" class="fa fa-times"></i>
+                                                <i ng-if="user.deleting" class="fa fa-spinner fa-spin"></i>
+                                            </span>
+                                            {{user.deleteMessage}}
+                                        </a>
                                     </div>
-                                    <div class="info-container">
-                                        <div class="row colbox">
-                                            <div class="col-lg-4 col-sm-4">
-                                                <label class="control-label">Name</label>
+                                </h4>
+                            </div>
+                            <div id="collapse-{{user.id}}" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <img data-ng-src="data:image/png;base64,{{user.photo_profile}}" ng-if="user.photo_profile !== null" class="pull-left img-circle">
+                                    <fieldset>
+                                        <div id="legend">
+                                            <legend class="">Personal Data</legend>
+                                        </div>
+                                        <div class="info-container">
+                                            <div class="row colbox">
+                                                <div class="col-lg-4 col-sm-4">
+                                                    <label class="control-label">Name</label>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-8">
+                                                    <label class="info">{{user.name}}</label>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-8 col-sm-8">
-                                                <label class="info">{{user.name}}</label>
+                                            <div class="row colbox">
+                                                <div class="col-lg-4 col-sm-4">
+                                                    <label class="control-label">Username</label>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-8">
+                                                    <label class="info">{{user.alias}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="row colbox">
+                                                <div class="col-lg-4 col-sm-4">
+                                                    <label class="control-label">Email</label>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-8">
+                                                    <label class="info">{{user.email}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="row colbox">
+                                                <div class="col-lg-4 col-sm-4">
+                                                    <label class="control-label">Sex</label>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-8">
+                                                    <label class="info">{{user.sex}}</label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row colbox">
-                                            <div class="col-lg-4 col-sm-4">
-                                                <label class="control-label">Username</label>
-                                            </div>
-                                            <div class="col-lg-8 col-sm-8">
-                                                <label class="info">{{user.alias}}</label>
-                                            </div>
-                                        </div>
-                                        <div class="row colbox">
-                                            <div class="col-lg-4 col-sm-4">
-                                                <label class="control-label">Email</label>
-                                            </div>
-                                            <div class="col-lg-8 col-sm-8">
-                                                <label class="info">{{user.email}}</label>
-                                            </div>
-                                        </div>
-                                        <div class="row colbox">
-                                            <div class="col-lg-4 col-sm-4">
-                                                <label class="control-label">Sex</label>
-                                            </div>
-                                            <div class="col-lg-8 col-sm-8">
-                                                <label class="info">{{user.sex}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
+                                    </fieldset>
 
-                                <fieldset>
-                                    <div id="legend">
-                                        <legend class="">Location</legend>
-                                    </div>
-                                    <p>Latitude: {{user.location.latitude}}, Longitude: {{user.location.longitude}}</p>
-                                </fieldset>
-                                <fieldset>
-                                    <div id="legend">
-                                        <legend class="">Interests</legend>
-                                    </div>
-                                    <p>
-                                        <span ng-repeat="interest in user.interests" class="label label-info tags"><i class="fa fa-thumbs-up"></i> {{interest.category}}/{{interest.value}}</span>
-                                    </p>
-                                </fieldset>
+                                    <fieldset>
+                                        <div id="legend">
+                                            <legend class="">Location</legend>
+                                        </div>
+                                        <p>Latitude: {{user.location.latitude}}, Longitude: {{user.location.longitude}}</p>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div id="legend">
+                                            <legend class="">Interests</legend>
+                                        </div>
+                                        <p>
+                                            <span ng-repeat="interest in user.interests" class="label label-info tags"><i class="fa fa-thumbs-up"></i> {{interest.category}}/{{interest.value}}</span>
+                                        </p>
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
