@@ -49,10 +49,10 @@
             },
             function (err) {
                 $mdToast.show(
-                $mdToast.simple('Error: ' + err.data.error)
-                    .position('top right')
-                    .parent(angular.element('#newInterestDiv'))
-                    .theme('error-toast')
+                    $mdToast.simple('Error: ' + err.data.error)
+                        .position('top right')
+                        .parent(angular.element('#newInterestDiv'))
+                        .theme('error-toast')
                 );
                 $scope.submitted = false;
                 $scope.submitButtonText = "Submit";

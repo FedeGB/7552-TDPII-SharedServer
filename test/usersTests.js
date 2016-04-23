@@ -22,7 +22,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('metadata.count must be equal to the number of users returned', function (done) {
             request(app)
                 .get('/users')
@@ -35,7 +35,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return the fields specified in the requirement for the reply and each user', function (done) {
             request(app)
                 .get('/users')
@@ -73,9 +73,9 @@ describe('Users', function () {
                 });
         });
     });
-
+    
     describe('#getUser', function () {
-
+    
         it('should return an error if the provided Id is invalid', function (done) {
             request(app)
                 .get('/users/' + 'sjdfidjfid')
@@ -89,7 +89,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return status 200 on successful completion', function (done) {
             request(app)
                 .get('/users/' + 1)
@@ -102,7 +102,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return information of requested user', function (done) {
             request(app)
                 .get('/users/' + 1)
@@ -115,7 +115,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return a null object if the user doesn\'t exist', function (done) {
             request(app)
                 .get('/users/' + 1000000101010101)
@@ -128,7 +128,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return the fields specified in the requirement for the reply and each user', function (done) {
             request(app)
                 .get('/users/' + 1)
@@ -162,7 +162,7 @@ describe('Users', function () {
                 });
         });
     });
-
+    
     describe('#addUser', function () {
         it('should return 201 on successful completion', function (done) {
             request(app)
@@ -201,7 +201,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should save the user fields correctly', function (done) {
             request(app)
                 .post('/users')
@@ -250,7 +250,7 @@ describe('Users', function () {
                         });
                 });
         });
-
+    
         it('should save the user with location (0,0) if no location is provided', function (done) {
             request(app)
                 .post('/users')
@@ -298,7 +298,7 @@ describe('Users', function () {
                         });
                 });
         });
-
+    
         it('should return an error if an interest/category doesn\'t exist', function (done) {
             request(app)
                 .post('/users')
@@ -336,7 +336,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user email already exists', function (done) {
             request(app)
                 .post('/users')
@@ -373,7 +373,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user alias already exists', function (done) {
             request(app)
                 .post('/users')
@@ -410,7 +410,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user alias and email already exist', function (done) {
             request(app)
                 .post('/users')
@@ -448,7 +448,7 @@ describe('Users', function () {
                 });
         });
     });
-
+    
     describe('#updateUser', function () {
         it('should return an error if the params Id and the body Id don\'t match', function (done) {
             request(app)
@@ -488,7 +488,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return 201 on successful completion', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -527,7 +527,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should save the user fields correctly', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -577,7 +577,7 @@ describe('Users', function () {
                         });
                 });
         });
-
+    
         it('should save the user with location (0,0) if no location is provided', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -626,7 +626,7 @@ describe('Users', function () {
                         });
                 });
         });
-
+    
         it('should return an error if an interest/category doesn\'t exist', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -665,8 +665,8 @@ describe('Users', function () {
                     done();
                 });
         });
-
-
+    
+    
         it('should return an error if the user email already exists', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -704,7 +704,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user alias already exists', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -742,7 +742,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return an error if the user alias and email already exist', function (done) {
             request(app)
                 .put('/users/' + 2)
@@ -781,9 +781,9 @@ describe('Users', function () {
                 });
         });
     });
-
+    
     describe('#deleteUser', function () {
-
+    
         it('should return an error if the provided Id is invalid', function (done) {
             request(app)
                 .delete('/users/' + 'sjdfidjfid')
@@ -797,7 +797,7 @@ describe('Users', function () {
                     done();
                 });
         });
-
+    
         it('should return 200 if the user was deleted successfully', function (done) {
             request(app)
                 .post('/users')
@@ -842,7 +842,7 @@ describe('Users', function () {
                         });
                 });
         });
-
+    
         it('should delete the user from the database', function (done) {
             var userId = 0;
             request(app)
@@ -900,4 +900,37 @@ describe('Users', function () {
                 });
         });
     });
+
+    describe('#getUserByUsername', function () {
+
+        it('should return status 200 on successful completion', function (done) {
+            request(app)
+                .get('/users/getByUsername')
+                .send({ username: 'janedoe' })
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(err).to.equal(null);
+                    done();
+                });
+        });
+
+        it('should return information of requested user', function (done) {
+            request(app)
+                .get('/users/getByUsername')
+                .send({ username: 'janedoe' })
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    expect(res.body.user.id).to.not.be.undefined;
+                    done();
+                });
+        });
+
+    });
+
 });

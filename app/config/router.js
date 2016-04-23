@@ -18,8 +18,8 @@ module.exports = function (app) {
         res.sendFile(app.get('views') + '/interests.html');
     });
 
-    router.route('/register.html').get(function (req, res) {
-        res.sendFile(app.get('views') + '/register.html');
+    router.route('/user.html').get(function (req, res) {
+        res.sendFile(app.get('views') + '/user.html');
     });
 
     router.route('/').get(function (req, res) {
@@ -29,6 +29,9 @@ module.exports = function (app) {
     router.route('/users')
         .get(usersCtrl.getUsers)
         .post(usersCtrl.addUser);
+
+    router.route('/users/getByUsername')
+        .get(usersCtrl.getUserByUsername);
 
     router.route('/users/:id')
         .get(usersCtrl.getUser)

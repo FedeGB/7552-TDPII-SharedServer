@@ -608,5 +608,6 @@ md-toast.md-success-toast-theme .md-toast-content {
 
 md-toast.md-error-toast-theme .md-toast-content {
     background-color: darkred;
+    z-index: 100000 !important;
 }
 

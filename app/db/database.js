@@ -36,10 +36,11 @@ module.exports = function () {
     
     self.getUserByEmailOrAlias = function (user) {
         var query = squel.select()
+            .field('id')
             .field('alias')
             .field('email')
             .from('users')
-            .where("alias = '" + user.alias + "' OR email = '" + user.email + "'")
+            .where("(alias = '" + user.alias + "' OR email = '" + user.email + "') AND id <> " + (user.id ? user.id : 0))
             .toString();
 
         return self.client.query(query);

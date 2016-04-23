@@ -6,16 +6,26 @@
     app.factory('dbService', ['$http', function ($http) {
         return {
             getUsers: getUsers,
+            getUser: getUser,
             getInterests: getInterests,
             addUser: addUser,
+            updateUser: updateUser,
             addInterest: addInterest,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            getUserByUsername: getUserByUsername
         };
         
         function getUsers() {
             return $http({
                 method: 'GET',
                 url: '/users'
+            });
+        }
+
+        function getUser(userId) {
+            return $http({
+                method: 'GET',
+                url: '/users/' + userId
             });
         }
 
@@ -34,6 +44,14 @@
             });
         }
 
+        function updateUser(user) {
+            return $http({
+                method: 'PUT',
+                url: '/users/' + user.id,
+                data: { user: user }
+            });
+        }
+
         function addInterest(interest) {
             return $http({
                 method: 'POST',
@@ -46,6 +64,14 @@
             return $http({
                 method: 'DELETE',
                 url: '/users/' + userId
+            });
+        }
+
+        function getUserByUsername(username) {
+            return $http({
+                method: 'GET',
+                url: '/users/getByUsername',
+                params: { username: username }
             });
         }
     }]);

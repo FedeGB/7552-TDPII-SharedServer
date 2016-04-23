@@ -87,8 +87,20 @@ module.exports = function () {
         
     };
 
+    self.getUserByUsername = function (req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        db.getUserByEmailOrAlias({ alias: req.query.username }).then(function (data) {
+            if (data.length === 0) {
+                res.status(500).send({ error: "Not found" });
+            }
+            else {
+                res.send(JSON.stringify(data[0]), null, 3);
+            }
+        });
+    };
+
     function handleAddAndUpdate(res, action, user, isUpdate) {
-        db.getUserByEmailOrAlias({email: user.email, alias: user.alias}).then(function (data) {
+        db.getUserByEmailOrAlias({email: user.email, alias: user.alias, id: user.id}).then(function (data) {
             if (data.length === 0) {
                 action(user).then(function (data) {
                     if (isUpdate) {

@@ -17,11 +17,19 @@ VALUES ('food', null);
 INSERT INTO Interests (CategoryId, Name)
 VALUES(4, 'Man');
 INSERT INTO Interests (CategoryId, Name)
+VALUES(1, 'Rock');
+INSERT INTO Interests (CategoryId, Name)
 VALUES(2, 'Pearl Jam');
 INSERT INTO Interests (CategoryId, Name)
 VALUES(2, 'Radiohead');
 INSERT INTO Interests (CategoryId, Name)
 VALUES(5, 'Running');
+INSERT INTO Interests (CategoryId, Name)
+VALUES(7, 'Asian');
+INSERT INTO Interests (CategoryId, Name)
+VALUES(6, 'Europe');
+INSERT INTO Interests (CategoryId, Name)
+VALUES(6, 'Backpacking');
 
 -- Insert default users
 INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex) 

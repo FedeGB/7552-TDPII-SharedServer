@@ -1,9 +1,12 @@
 (function () {
     'use strict';
 
-    app.controller("userController", function ($scope, dbService, $window) {
-        var self = this;
+    app.controller("userController", function ($scope, dbService, $window, $location) {
 
+        $scope.isEdit = false;
+        $scope.isNew = true;
+
+        var self = this;
         self.categories = [];
         self.interests = [];
         self.alerts = [];
@@ -21,11 +24,25 @@
         $scope.submitButtonText = "Submit";
 
         self.load = function () {
+            var qs = $location.search();
+            if (qs.userId) {
+                $scope.isNew = false;
+                dbService.getUser(qs.userId).then(function (data) {
+                    self.user = data.data.user;
+                    self.user.photoprofile = data.data.user.photo_profile;
+                });
+            }
             dbService.getInterests().then(function (data) {
                 self.interests = data.data.interests;
                 self.interests.forEach(function (interest) {
                     if (self.categories.indexOf(interest.category) < 0) {
                         self.categories.push(interest.category);
+                    }
+                    if (self.user.interests.length > 0) {
+                        var found = self.user.interests.find(function (it) { return it.category === interest.category && it.value === interest.value; });
+                        if (found.length > 0) {
+                            interest.selected = true;
+                        }
                     }
                 });
             });
@@ -74,7 +91,34 @@
             $scope.submitted = true;
             $scope.submitButtonText = "Loading...";
             if (self.validateSubmit()) {
-                dbService.addUser(self.user).then(function (data) {
+                if ($scope.isNew) {
+                    self.addUser();
+                }
+                
+                else {
+                    self.updateUser();
+                }
+            }
+            else {
+                $scope.submitted = false;
+                $scope.submitButtonText = "Submit";
+            }
+        };
+        
+        self.updateUser = function () {
+            dbService.updateUser(self.user).then(function (data) {
+                $window.location.href = '/users.html';  //TODO: cambiar por profile del usuario creado
+            },
+            function (err) {
+                console.log(err);
+                self.alerts.push({ type: 'danger', msg: 'Error updating user: ' + err.data.error });
+                $scope.submitted = false;
+                $scope.submitButtonText = "Submit";
+            });
+        };
+        
+        self.addUser = function () {
+            dbService.addUser(self.user).then(function (data) {
                     $window.location.href = '/users.html';  //TODO: cambiar por profile del usuario creado
                 },
                 function (err) {
@@ -83,11 +127,6 @@
                     $scope.submitted = false;
                     $scope.submitButtonText = "Submit";
                 });
-            }
-            else {
-                $scope.submitted = false;
-                $scope.submitButtonText = "Submit";
-            }
         };
 
         self.load();
