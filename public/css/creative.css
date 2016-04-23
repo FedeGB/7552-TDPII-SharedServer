@@ -601,3 +601,11 @@ label.info {
 #submitButton{
     margin-top: 15px;
 }
+
+md-toast.md-success-toast-theme .md-toast-content {
+    background-color: green;
+}
+
+md-toast.md-error-toast-theme .md-toast-content {
+    background-color: darkred;
+}

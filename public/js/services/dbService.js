@@ -7,7 +7,8 @@
         return {
             getUsers: getUsers,
             getInterests: getInterests,
-            addUser: addUser
+            addUser: addUser,
+            addInterest: addInterest
         };
         
         function getUsers() {
@@ -29,6 +30,14 @@
                 method: 'POST',
                 url: '/users',
                 data: { user: user }
+            });
+        }
+
+        function addInterest(interest) {
+            return $http({
+                method: 'POST',
+                url: '/interests',
+                data: { interest: interest }
             });
         }
     }]);

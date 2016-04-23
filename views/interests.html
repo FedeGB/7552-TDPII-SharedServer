@@ -14,6 +14,7 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 
+    <link rel="stylesheet" href="css/angular-material.min.css" type="text/css">
     <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -67,10 +68,42 @@
 <nav-bar></nav-bar>
 <div class="container">
     <h1 class="page-header">Interests management</h1>
-    <p class="lead">Click a Category to see the available interests.</p>
-    <div class="row">
-
+    <div id="newInterestDiv">
+        <p class="lead">Add new interest.</p>
+        <form name="newInterest">
+            <div layout="row">
+                <div layout="column">
+                    <md-input-container>
+                        <label>Interest</label>
+                        <input ng-model="interestsCtrl.interest.value" name="interest" required>
+                        <div ng-messages="newInterest.interest.$error" ng-if="newInterest.interest.$error.required && newInterest.interest.$touched">
+                            <div ng-message="required">Required.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout="column">
+                    <md-input-container>
+                        <label>Category</label>
+                        <md-select name="category" ng-model="interestsCtrl.interest.category" required>
+                            <md-option ng-repeat="category in interestsCtrl.categories" value="{{category}}">
+                                {{category}}
+                            </md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="newInterest.category.$error" ng-if="newInterest.category.$error.required && newInterest.category.$touched">
+                            <div ng-message="required">Required</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout="column" layout-align="start" layout-margin>
+                    <md-button ng-disabled="!newInterest.$valid || submitted" ng-click="interestsCtrl.submit()" class="md-raised md-primary">{{submitButtonText}}</md-button>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </form>
     </div>
+    <p class="lead">Click a Category to see the available interests.</p>
+
     <div class="row">
         <uib-accordion>
             <uib-accordion-group ng-repeat="category in interestsCtrl.categories" heading="{{category}}">
