@@ -11,3 +11,7 @@ before_script:
   - psql -U sharedserver_user -d sharedserver -a -f ./PostgreSQL/storedProcedures.sql
   - psql -U sharedserver_user -d sharedserver -a -f ./PostgreSQL/defaultDatabase.sql
 script: "npm run-script coverage"
+deploy:
+  provider: heroku
+  api_key: f743ba73-0c46-4dbc-8318-b3eca095d5f5
+  app: nameless-atoll-70387
