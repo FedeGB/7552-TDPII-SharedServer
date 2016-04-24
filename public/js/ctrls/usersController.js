@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    app.controller("usersController", function ($scope, dbService, $mdToast) {
+    app.controller("usersController", function ($scope, dbService, $mdToast, $window) {
         
         var self = this;
 
@@ -11,6 +11,10 @@
             dbService.getUsers().then(function (data) {
                 self.users = data.data.users.map(function (it) { it.deleting = false; it.deleteMessage = "Remove"; return it; });
             });
+        };
+        
+        self.update = function (userId) {
+            $window.location.href = '/user.html#?userId=' + userId;
         };
 
         self.delete = function (user) {

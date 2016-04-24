@@ -82,7 +82,7 @@
                                         {{user.name}} <small>({{user.alias}})</small>
                                     </a>
                                     <div class="btn-group pull-right">
-                                        <a href="#" class="btn btn-warning"><i class="fa fa-pencil"></i><span> Edit</span></a>
+                                        <a ng-click="usersCtrl.update(user.id)" class="btn btn-warning"><i class="fa fa-pencil"></i><span> Edit</span></a>
                                         <a ng-click="user.deleting || usersCtrl.delete(user)" class="btn btn-danger has-spinner" ng-disabled="user.deleting">
                                             <span class="spinner">
                                                 <i ng-if="!user.deleting" class="fa fa-times"></i>
