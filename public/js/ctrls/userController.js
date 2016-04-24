@@ -87,7 +87,7 @@
                 valid = false;
             }
 
-            if (self.user.photo_profile === null || self.user.photo_profile === '') {
+            if (self.user.photoprofile === null || self.user.photoprofile === '') {
                 self.alerts.push({ type: 'danger', msg: 'You must add a profile photo' });
                 valid = false;
             }
