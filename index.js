@@ -8,8 +8,8 @@ app.set('views', __dirname + '/views');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({extended: false, limit: '50mb'}));
 app.use(bodyParser({limit: '50mb'}));
 
 var router = require('./app/config/router')(app);
