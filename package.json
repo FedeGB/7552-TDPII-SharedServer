@@ -20,7 +20,13 @@
     "express": "4.13.3",
     "mocha": "^2.2.0",
     "node-base64-image": "^0.1.2",
-    "pg": "^4.5.3"
+    "pg": "^4.5.3",
+    "chai": "^3.5.0",
+    "istanbul": "^0.3.22",
+    "pg-promise": "^3.7.5",
+    "pg-query": "^0.11.0",
+    "squel": "^5.0.1",
+    "supertest": "^1.2.0"
   },
   "engines": {
     "node": "0.12.7"
@@ -40,13 +46,5 @@
     "heroku",
     "express"
   ],
-  "license": "MIT",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "istanbul": "^0.3.22",
-    "pg-promise": "^3.7.5",
-    "pg-query": "^0.11.0",
-    "squel": "^5.0.1",
-    "supertest": "^1.2.0"
-  }
+  "license": "MIT"
 }
