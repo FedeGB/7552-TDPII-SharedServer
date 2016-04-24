@@ -30,6 +30,8 @@
                 dbService.getUser(qs.userId).then(function (data) {
                     self.user = data.data.user;
                     self.user.photoprofile = data.data.user.photo_profile;
+                    console.log(self.user);
+                    self.fillUserInterests();
                 });
             }
             dbService.getInterests().then(function (data) {
@@ -38,13 +40,19 @@
                     if (self.categories.indexOf(interest.category) < 0) {
                         self.categories.push(interest.category);
                     }
-                    if (self.user.interests.length > 0) {
-                        var found = self.user.interests.find(function (it) { return it.category === interest.category && it.value === interest.value; });
-                        if (found.length > 0) {
-                            interest.selected = true;
-                        }
-                    }
                 });
+                self.fillUserInterests();
+            });
+        };
+
+        self.fillUserInterests = function () {
+            self.interests.forEach(function (interest) {
+                if (self.user.interests.length > 0) {
+                    var found = self.user.interests.find(function (it) { return it.category === interest.category && it.value === interest.value; });
+                    if (found) {
+                        interest.selected = true;
+                    }
+                }
             });
         };
 
