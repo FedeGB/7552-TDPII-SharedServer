@@ -1,8 +1,8 @@
-# Título
+# SharedServer: Manual de usuario
 
-Párrafo
+Aquí se presentan los features más importantes para el uso del SharedServer, que puede accederse a través de [este link](http://tp-7552-g05-sharedserver.heroku.com/) o dirigiéndose a la URL ```http://tp-7552-g05-sharedserver.heroku.com/
 
-## Título 2
+## Página de inicio.
 
 Párrafo 2
 
