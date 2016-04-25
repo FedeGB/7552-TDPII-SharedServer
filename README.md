@@ -1,10 +1,12 @@
 # SharedServer: Manual de usuario
 
-Aquí se presentan los features más importantes para el uso del SharedServer, que puede accederse a través de [este link](http://tp-7552-g05-sharedserver.heroku.com/) o dirigiéndose a la URL ```http://tp-7552-g05-sharedserver.heroku.com/
+Aquí se presentan los features más importantes para el uso del SharedServer, que puede accederse a través de http://tp-7552-g05-sharedserver.heroku.com/
 
 ## Página de inicio.
 
-Párrafo 2
+Al ingresar, se encontrará con la siguiente pantalla:
+
+<img src="http://i.imgur.com/KicuF5C.png" width=600 />
 
 ```sh
 $ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
