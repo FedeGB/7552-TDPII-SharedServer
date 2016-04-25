@@ -14,4 +14,4 @@ script: "npm run-script coverage"
 deploy:
   provider: heroku
   api_key: f743ba73-0c46-4dbc-8318-b3eca095d5f5
-  app: nameless-atoll-70387
+  app: tp-7552-g05-sharedserver
