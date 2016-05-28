@@ -1,21 +1,33 @@
 var app = angular.module("matchApp", ['ngRoute', 'ngMaterial', 'ui.bootstrap', 'naif.base64']);
-app.config(function($routeProvider) {
-	 $routeProvider
-            .when("/", {
-                templateUrl: "landing.html",
-                controller: "IndexController"
-            })
-            .when("/user.html", {
-                controller: "userController",
-                templateUrl: "user.html"
-            })
-            .when("/users.html", {
-               controller: "usersController",
-               templateUrl: "users.html"
-            })
-            .otherwise({
-               redirectTo: "/"
-            });
+app.config(function($routeProvider, $mdThemingProvider) {
+    $routeProvider
+        .when("/", {
+            templateUrl: "landing.html",
+            controller: "IndexController"
+        })
+        .when("/user.html", {
+            controller: "userController",
+            templateUrl: "user.html"
+        })
+        .when("/users.html", {
+           controller: "usersController",
+           templateUrl: "users.html"
+        })
+        .otherwise({
+           redirectTo: "/"
+        });
+
+    $mdThemingProvider.theme('grey')
+        .primaryPalette('grey', {
+            'hue-1': '800',
+            'hue-2': '900'
+        });
+
+    $mdThemingProvider.theme('default');
+    $mdThemingProvider.theme('dark', 'default')
+        .primaryPalette('grey')
+        .dark();
+    $mdThemingProvider.alwaysWatchTheme(true);
 });
 
 app.controller('loginController', function ($scope, $window, dbService, $mdToast) {

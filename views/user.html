@@ -61,102 +61,119 @@
 
 </head>
 
-<body id="page-top" ng-controller="userController as userCtrl">
+<body id="page-top" ng-controller="userController as userCtrl" md-theme="grey">
 
     <nav-bar></nav-bar>
-    <div class="container">
-        <h1 class="well">Registration Form</h1>
-        <div class="col-lg-12 well">
-            <div class="row">
-                <form name="form">
-                    <div class="col-sm-12">
-                        <fieldset>
-                            <div id="legend">
-                                <legend class="">User Data</legend>
-                            </div>
-                            <uib-alert ng-repeat="alert in userCtrl.alerts" type="{{alert.type}}" close="userCtrl.closeAlert($index)">{{alert.msg}}</uib-alert>
-                            <div class="row">
-                                <div class="col-sm-6 form-group">
-                                    <label>Name</label>
-                                    <div class="form-group"
-                                         ng-class="{'has-error': form.name.$touched && form.name.$error.required,
-                                                    'has-feedback': form.name.$touched && form.name.$error.required }">
-                                        <input type="text" name="name" ng-model="userCtrl.user.name" placeholder="Enter Name Here" class="form-control" required>
-                                        <label class="control-label" ng-show="form.name.$touched && form.name.$error.required">This field is mandatory</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 form-group">
-                                    <label>Username</label>
-                                    <div class="form-group"
-                                         ng-class="{'has-error': form.alias.$touched && form.alias.$error.required,
-                                                    'has-feedback': form.alias.$touched && form.alias.$error.required }">
-                                        <input type="text" name="alias" ng-model="userCtrl.user.alias" placeholder="Enter Username Here" class="form-control" required>
-                                        <label class="control-label" ng-show="form.alias.$touched && form.alias.$error.required">This field is mandatory</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6 form-group">
-                                    <label>Email</label>
-                                    <div class="form-group"
-                                         ng-class="{'has-error': form.email.$touched && form.email.$error,
-                                                    'has-feedback': form.email.$touched && form.email.$error}">
-                                        <input type="email" name="email" ng-model="userCtrl.user.email" placeholder="email@server.com" class="form-control" required>
-                                        <label class="control-label" ng-show="form.email.$touched && form.email.$error.required">This field is mandatory</label>
-                                        <label class="control-label" ng-show="form.email.$touched && form.email.$error.email">Invalid email</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 form-group">
-                                    <label>Sex</label>
-                                    <div>
-                                        <select ng-model="userCtrl.user.sex" required   class="form-control">
-                                            <option value="M" selected>Male</option>
-                                            <option value="F">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 form-group">
-                                    <label>Photo Profile</label>
-                                    <input type='file' ng-model='photoprofile' ng-change="userCtrl.changePhoto()" base-sixty-four-input>
-                                </div>
-                                <div class="col-sm-2 form-group">
-                                    <img data-ng-src="data:image/png;base64,{{userCtrl.user.photoprofile}}" ng-if="userCtrl.user.photoprofile !== null"
-                                         style="max-width:100%; max-height:100%"
-                                         class="pull-left img-responsive img-thumbnail">
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div id="legend">
-                                <legend class="">Interests</legend>
-                            </div>
-                            <uib-accordion>
-                                <uib-accordion-group ng-repeat="category in userCtrl.categories" heading="{{category}}">
-                                    <div ng-repeat="interest in userCtrl.interests | filter: { category: category }">
-                                        <input type="checkbox" ng-model="interest.selected" ng-change="userCtrl.addInterest(interest)"/> {{interest.value}}
-                                    </div>
-                                </uib-accordion-group>
-                            </uib-accordion>
-                        </fieldset>
-                        <div class="row">
-                            <div class="col-sm-1" ng-show="submitted" >
-                                <md-progress-circular class="md-warn md-hue-3" md-diameter="70"></md-progress-circular>
-                            </div>
-                            <div class="col-sm-11">
-                                <button type="button" class="btn btn-lg btn-info" id="submitButton"
-                                        ng-disabled="!form.$valid || submitted"
-                                        ng-click="userCtrl.submit()">
-                                    {{ submitButtonText }}
-                                </button>
-                            </div>
-                        </div>
+    <div class="container" style="padding-top:20px">
 
+        <md-toolbar class="md-primary md-hue-2 fill-height">
+            <h1 class="md-toolbar-tools">
+                <span>Formulario de Usuario</span>
+            </h1>
+        </md-toolbar>
+
+        <md-content layout-padding id="userForm">
+            <form name="form">
+                <!--<div class="col-sm-12">-->
+
+                <md-toolbar class="md-primary md-hue-1">
+                    <h1 class="md-toolbar-tools">
+                        <span>Datos de Usuario</span>
+                    </h1>
+                </md-toolbar>
+                <md-content layout-padding>
+                    <uib-alert ng-repeat="alert in userCtrl.alerts" type="{{alert.type}}" close="userCtrl.closeAlert($index)">{{alert.msg}}</uib-alert>
+                    <div layout="row" layout-xl="column">
+                        <md-input-container flex>
+                            <label>Nombre</label>
+                            <input type="text" name="name" ng-model="userCtrl.user.name" placeholder="Ingrese Nombre" class="form-control" required>
+                            <div ng-messages="form.name.$error" ng-if="form.name.$touched && form.name.$error.required" role="alert">
+                                <div ng-message-exp="['required']">
+                                    Este campo es obligatorio
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Nombre de Usuario</label>
+                            <input type="text" name="alias" ng-model="userCtrl.user.alias" placeholder="Ingrese Nombre de Usuario" class="form-control" required>
+                            <div ng-messages="form.alias.$error" ng-if="form.alias.$touched && form.alias.$error.required" role="alert">
+                                <div ng-message-exp="['required']">
+                                    Este campo es obligatorio
+                                </div>
+                            </div>
+                        </md-input-container>
                     </div>
-                </form>
-            </div>
-        </div>
+                    <div layout="row" layout-xl="column">
+                        <md-input-container flex>
+                            <label>Email</label>
+                            <input type="email" name="email" ng-model="userCtrl.user.email" placeholder="email@server.com" class="form-control" required>
+                            <div ng-messages="form.email.$error" ng-if="form.email.$touched && (form.email.$error.required || form.email.$error.email)" role="alert">
+                                <div ng-message-exp="['required']" ng-if="form.email.$error.required ">
+                                    Este campo es obligatorio
+                                </div>
+                                <div ng-message-exp="['email']" ng-if="form.email.$error.email">
+                                    Email inválido
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Sexo</label>
+                            <md-select ng-model="userCtrl.user.sex" required >
+                                <md-option value="M" selected>Masculino</md-option>
+                                <md-option value="F" selected>Femenino</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-xl="column">
+                        <div layout="column" layout-align="center">
+                            <label>Foto de Perfil</label>
+                            <input type='file' ng-model='photoprofile' ng-change="userCtrl.changePhoto()" base-sixty-four-input>
+                        </div>
+                        <div flex-xs flex-gt-xs="20" layout="column">
+                            <md-card>
+                                <img src="/img/noimage.jpg"
+                                     ng-if="userCtrl.user.photoprofile === null"
+                                     style="max-width:100%; max-height:100%"
+                                     class="pull-left img-responsive img-thumbnail">
+                                <img data-ng-src="data:image/png;base64,{{userCtrl.user.photoprofile}}"
+                                     ng-if="userCtrl.user.photoprofile !== null"
+                                     style="max-width:100%; max-height:100%"
+                                     class="pull-left img-responsive img-thumbnail">
+                            </md-card>
+                        </div>
+                    </div>
+                </md-content>
+
+                <md-toolbar class="md-primary md-hue-1">
+                    <h1 class="md-toolbar-tools">
+                        <span>Intereses</span>
+                    </h1>
+                </md-toolbar>
+                <md-content layout-padding>
+                    <uib-accordion>
+                        <uib-accordion-group ng-repeat="category in userCtrl.categories" heading="{{category}}">
+                            <div layout="row" layout-wrap flex>
+                            <div flex="50" ng-repeat="interest in userCtrl.interests | filter: { category: category }">
+                                <!--<input type="checkbox" ng-model="interest.selected" ng-change="userCtrl.addInterest(interest)"/> {{interest.value}}-->
+                                <md-checkbox ng-model="interest.selected"
+                                             ng-change="userCtrl.addInterest(interest)">
+                                    {{interest.value}}
+                                </md-checkbox>
+                            </div>
+                            </div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </md-content>
+                <md-button class="md-raised md-primary" id="submitButton"
+                            ng-disabled="!form.$valid || submitted"
+                            ng-click="userCtrl.submit()">
+                    {{ submitButtonText }}</md-button>
+                <div class="col-sm-1" ng-show="submitted" >
+                    <md-progress-circular class="md-warn md-hue-3" md-diameter="70"></md-progress-circular>
+                </div>
+            </form>
+        </md-content>
+
     </div>
 </body>
 

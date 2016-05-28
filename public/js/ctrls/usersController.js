@@ -9,7 +9,7 @@
 
         self.load = function () {
             dbService.getUsers().then(function (data) {
-                self.users = data.data.users.map(function (it) { it.deleting = false; it.deleteMessage = "Remove"; return it; });
+                self.users = data.data.users.map(function (it) { it.deleting = false; it.deleteMessage = "Borrar"; return it; });
             });
         };
         
@@ -19,11 +19,11 @@
 
         self.delete = function (user) {
             user.deleting = true;
-            user.deleteMessage = "Removing";
+            user.deleteMessage = "Borrando...";
             dbService.deleteUser(user.id).then(function (data) {
                 self.load();
                 $mdToast.show(
-                    $mdToast.simple('User removed successfully')
+                    $mdToast.simple('Usuario borrado exitosamente')
                         .position('top right')
                         .parent(angular.element('#userManagement'))
                         .theme('success-toast')
@@ -31,7 +31,7 @@
             },
             function (err) {
                 user.deleting = false;
-                user.deleteMessage = "Remove";
+                user.deleteMessage = "Borrar";
                 $mdToast.show(
                     $mdToast.simple('Error: ' + err.data.error)
                         .position('top right')

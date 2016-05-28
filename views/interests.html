@@ -63,56 +63,72 @@
 
 </head>
 
-<body ng-controller="interestsController as interestsCtrl">
+<body ng-controller="interestsController as interestsCtrl" md-theme="grey">
 
-<nav-bar></nav-bar>
-<div class="container">
-    <h1 class="page-header">Interests management</h1>
-    <div id="newInterestDiv">
-        <p class="lead">Add new interest.</p>
-        <form name="newInterest">
-            <div layout="row">
-                <div layout="column">
-                    <md-input-container>
-                        <label>Interest</label>
-                        <input ng-model="interestsCtrl.interest.value" name="interest" required>
-                        <div ng-messages="newInterest.interest.$error" ng-if="newInterest.interest.$error.required && newInterest.interest.$touched">
-                            <div ng-message="required">Required.</div>
-                        </div>
-                    </md-input-container>
-                </div>
-                <div layout="column">
-                    <md-input-container>
-                        <label>Category</label>
-                        <md-select name="category" ng-model="interestsCtrl.interest.category" required>
-                            <md-option ng-repeat="category in interestsCtrl.categories" value="{{category}}">
-                                {{category}}
-                            </md-option>
-                        </md-select>
-                        <div class="errors" ng-messages="newInterest.category.$error" ng-if="newInterest.category.$error.required && newInterest.category.$touched">
-                            <div ng-message="required">Required</div>
-                        </div>
-                    </md-input-container>
-                </div>
-                <div layout="column" layout-align="start" layout-margin>
-                    <md-button ng-disabled="!newInterest.$valid || submitted" ng-click="interestsCtrl.submit()" class="md-raised md-primary">{{submitButtonText}}</md-button>
-                </div>
-            </div>
-            <div class="row">
-            </div>
-        </form>
-    </div>
-    <p class="lead">Click a Category to see the available interests.</p>
+    <nav-bar></nav-bar>
+    <div class="container"  style="padding-top:20px">
+        <md-toolbar class="md-primary md-hue-2">
+            <h1 class="md-toolbar-tools">
+                <span>Administración de Intereses</span>
+            </h1>
+        </md-toolbar>
 
-    <div class="row">
-        <uib-accordion>
-            <uib-accordion-group ng-repeat="category in interestsCtrl.categories" heading="{{category}}">
-                <ul class="list-group">
-                    <li ng-repeat="interest in interestsCtrl.interests | filter: { category: category }" class="list-group-item col-md-3">{{interest.value}}</li>
-                </ul>
-            </uib-accordion-group>
-        </uib-accordion>
+        <md-content layout-padding>
+            <form name="newInterest">
+                <md-toolbar class="md-primary md-hue-1">
+                    <h2 class="md-toolbar-tools">
+                        <span>Añadir nuevo interés</span>
+                    </h2>
+                </md-toolbar>
+                <md-content layout-padding id="newInterestDiv">
+                    <div layout="row">
+                        <div layout="column" flex="30">
+                            <md-input-container>
+                                <label>Interés</label>
+                                <input ng-model="interestsCtrl.interest.value" name="interest" required>
+                                <div ng-messages="newInterest.interest.$error" ng-if="newInterest.interest.$error.required && newInterest.interest.$touched">
+                                    <div ng-message="required">Requerido.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout="column" flex="40">
+                            <md-input-container>
+                                <label>Categoría</label>
+                                <md-select name="category" ng-model="interestsCtrl.interest.category" required>
+                                    <md-option ng-repeat="category in interestsCtrl.categories" value="{{category}}">
+                                        {{category}}
+                                    </md-option>
+                                </md-select>
+                                <div class="errors" ng-messages="newInterest.category.$error" ng-if="newInterest.category.$error.required && newInterest.category.$touched">
+                                    <div ng-message="required">Requerido</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout="column" layout-align="start" layout-margin flex="10">
+                            <md-button ng-disabled="!newInterest.$valid || submitted" ng-click="interestsCtrl.submit()" class="md-raised md-primary">{{submitButtonText}}</md-button>
+                        </div>
+                    </div>
+                </md-content>
+            </form>
+            <form>
+                <md-toolbar class="md-primary md-hue-1">
+                    <h2 class="md-toolbar-tools">
+                        <span>Hacer click sobre una Categoría para ver los Intereses disponibles</span>
+                    </h2>
+                </md-toolbar>
+                <md-content layout-padding>
+                    <uib-accordion>
+                        <uib-accordion-group ng-repeat="cat in interestsCtrl.categories" heading="{{cat}}">
+                            <md-chips ng-model="interestsCtrl.categoryInterests[cat]    " readonly="true">
+                                <md-chip-template>
+                                    {{$chip.value}}
+                                </md-chip-template>
+                            </md-chips>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </md-content>
+            </form>
+        </md-content>
     </div>
-</div>
 </body>
 </html>

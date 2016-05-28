@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    app.controller("userController", function ($scope, dbService, $window, $location) {
+    app.controller("userController", function ($scope, dbService, $window, $location, $mdToast) {
 
         $scope.isEdit = false;
         $scope.isNew = true;
@@ -9,7 +9,6 @@
         var self = this;
         self.categories = [];
         self.interests = [];
-        self.alerts = [];
         self.user = {
             name: '',
             alias: '',
@@ -21,7 +20,7 @@
 
         $scope.photoprofile = null;
         $scope.submitted = false;
-        $scope.submitButtonText = "Submit";
+        $scope.submitButtonText = "Enviar";
 
         self.load = function () {
             var qs = $location.search();
@@ -82,13 +81,24 @@
 
         self.validateSubmit = function () {
             var valid = true;
+            
             if (self.user.interests.length === 0) {
-                self.alerts.push({ type: 'danger', msg: 'You must select at least one interest' });
+                $mdToast.show(
+                    $mdToast.simple('Debe elegir al menos un interés')
+                        .position('top right')
+                        .parent(angular.element('#userForm'))
+                        .theme('error-toast')
+                );
                 valid = false;
             }
 
             if (self.user.photoprofile === null || self.user.photoprofile === '') {
-                self.alerts.push({ type: 'danger', msg: 'You must add a profile photo' });
+                $mdToast.show(
+                    $mdToast.simple('Debe agregar una foto de perfil')
+                        .position('top right')
+                        .parent(angular.element('#userForm'))
+                        .theme('error-toast')
+                );
                 valid = false;
             }
 
@@ -97,7 +107,7 @@
 
         self.submit = function () {
             $scope.submitted = true;
-            $scope.submitButtonText = "Loading...";
+            $scope.submitButtonText = "Cargando...";
             if (self.validateSubmit()) {
                 if ($scope.isNew) {
                     self.addUser();
@@ -109,7 +119,7 @@
             }
             else {
                 $scope.submitted = false;
-                $scope.submitButtonText = "Submit";
+                $scope.submitButtonText = "Enviar";
             }
         };
         
@@ -121,7 +131,7 @@
                 console.log(err);
                 self.alerts.push({ type: 'danger', msg: 'Error updating user: ' + err.data.error });
                 $scope.submitted = false;
-                $scope.submitButtonText = "Submit";
+                $scope.submitButtonText = "Enviar";
             });
         };
         
@@ -133,7 +143,7 @@
                     console.log(err);
                     self.alerts.push({ type: 'danger', msg: 'Error adding user: ' + err.data.error });
                     $scope.submitted = false;
-                    $scope.submitButtonText = "Submit";
+                    $scope.submitButtonText = "Enviar";
                 });
         };
 

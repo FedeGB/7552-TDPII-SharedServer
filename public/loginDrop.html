@@ -2,14 +2,11 @@
 	<form class="form" name="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
 		<div class="form-group">
 			 <label class="sr-only" for="usernameInput">Username</label>
-			 <input type="text" ng-model="loginCtrl.username" name="username" id="usernameInput" class="form-control" placeholder="Username" required>
+			 <input type="text" ng-model="loginCtrl.username" name="username" id="usernameInput" class="form-control" placeholder="Nombre de Usuario" required>
 		</div>
 		<div class="form-group">
 			 <button type="submit" class="btn btn-primary btn-block" ng-disabled="!form.$valid || submitted" ng-click="loginCtrl.search()">Search</button>
 		</div>
 	 </form>
-	</div>
-	<div class="bottom text-center">
-		New here ? <a href="/user.html"><b>Join Us</b></a>
 	</div>
  </div>
