@@ -5,6 +5,7 @@
 
         $scope.isEdit = false;
         $scope.isNew = true;
+        $scope.askedForLocation = false;
 
         var self = this;
         self.categories = [];
@@ -15,7 +16,8 @@
             email: '',
             sex: 'M',
             photoprofile: null,
-            interests: []
+            interests: [],
+            location: {}
         };
 
         $scope.photoprofile = null;
@@ -23,11 +25,23 @@
         $scope.submitButtonText = "Enviar";
 
         self.load = function () {
+            if (!$scope.askedForLocation)
+            {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    self.user.location = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
+                });
+                $scope.askedForLocation = true;
+            }
             var qs = $location.search();
             if (qs.userId) {
                 $scope.isNew = false;
                 dbService.getUser(qs.userId).then(function (data) {
+                    var currentLocation = self.user.location.latitude !== undefined ? self.user.location : data.data.user.location;
                     self.user = data.data.user;
+                    self.user.location = currentLocation;
                     self.user.photoprofile = data.data.user.photo_profile;
                     console.log(self.user);
                     self.fillUserInterests();
@@ -129,7 +143,12 @@
             },
             function (err) {
                 console.log(err);
-                self.alerts.push({ type: 'danger', msg: 'Error updating user: ' + err.data.error });
+                $mdToast.show(
+                    $mdToast.simple('Error al editar usuario: ' +  + err.data.error)
+                        .position('top right')
+                        .parent(angular.element('#userForm'))
+                        .theme('error-toast')
+                );
                 $scope.submitted = false;
                 $scope.submitButtonText = "Enviar";
             });
@@ -141,7 +160,12 @@
                 },
                 function (err) {
                     console.log(err);
-                    self.alerts.push({ type: 'danger', msg: 'Error adding user: ' + err.data.error });
+                    $mdToast.show(
+                        $mdToast.simple('Error al añadir usuario: ' +  + err.data.error)
+                            .position('top right')
+                            .parent(angular.element('#userForm'))
+                            .theme('error-toast')
+                    );
                     $scope.submitted = false;
                     $scope.submitButtonText = "Enviar";
                 });
