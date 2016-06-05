@@ -15,6 +15,7 @@
             alias: '',
             email: '',
             sex: 'M',
+            edad: '',
             photoprofile: null,
             interests: [],
             location: {}

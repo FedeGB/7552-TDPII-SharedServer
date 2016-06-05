@@ -125,7 +125,16 @@
                         </md-input-container>
                     </div>
                     <div layout="row" layout-xl="column">
-                        <div layout="column" layout-align="center">
+                        <md-input-container flex="50">
+                            <label>Edad</label>
+                            <input type='number' name="edad" ng-model='userCtrl.user.edad' placeHolder="Edad" class="form-control" required>
+                            <div ng-messages="form.edad.$error" ng-if="form.edad.$touched && form.edad.$error.required" role="alert">
+                                <div ng-message-exp="['required']" ng-if="form.edad.$error.required ">
+                                    Este campo es obligatorio
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <div layout="column" layout-align="top">
                             <label>Foto de Perfil</label>
                             <input type='file' ng-model='photoprofile' ng-change="userCtrl.changePhoto()" base-sixty-four-input>
                         </div>
@@ -167,10 +176,8 @@
                 <md-button class="md-raised md-primary" id="submitButton"
                             ng-disabled="!form.$valid || submitted"
                             ng-click="userCtrl.submit()">
+                    <i ng-show="submitted" class="fa fa-spinner fa-spin"></i>
                     {{ submitButtonText }}</md-button>
-                <div class="col-sm-1" ng-show="submitted" >
-                    <md-progress-circular class="md-warn md-hue-3" md-diameter="70"></md-progress-circular>
-                </div>
             </form>
         </md-content>
 
