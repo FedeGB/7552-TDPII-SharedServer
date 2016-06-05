@@ -14,6 +14,7 @@ RETURNS TABLE (
 	photoprofile text,
 	email text,
 	sex char(1),
+	edad int,
 	locationx real,
 	locationy real,
 	interests text[]
@@ -39,6 +40,7 @@ RETURNS TABLE (
 	photoprofile text,
 	email text,
 	sex char(1),
+	edad int,
 	locationx real,
 	locationy real,
 	interests text[]
@@ -56,6 +58,7 @@ BEGIN
 END; $$
 LANGUAGE 'plpgsql';
 
+
 -- addUser
 CREATE OR REPLACE FUNCTION addUser(
 	nname text,
@@ -63,6 +66,7 @@ CREATE OR REPLACE FUNCTION addUser(
 	photoprofile text,
 	email text,
 	sex char(1),
+	edad int,
 	locationx real,
 	locationy real,
 	interests text[]
@@ -75,8 +79,8 @@ DECLARE ncategoryId bigint;
 DECLARE ninterestName text;
 DECLARE ncategoryName text;
 BEGIN	
-	INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex) 
-	VALUES (nname, alias, photoprofile, email, sex);
+	INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex, Edad) 
+	VALUES (nname, alias, photoprofile, email, sex, edad);
 	SELECT CURRVAL('users_id_seq') INTO uId;
 
 	INSERT INTO Location (UserId, LocationX, LocationY)
@@ -105,6 +109,7 @@ CREATE OR REPLACE FUNCTION updateUser(
 	nphotoprofile text,
 	nemail text,
 	nsex char(1),
+	nedad int,
 	nlocationx real,
 	nlocationy real,
 	interests text[]
@@ -121,7 +126,8 @@ BEGIN
 		Alias = nalias,
 		PhotoProfile = nphotoprofile,
 		Email = nemail,
-		Sex = nsex
+		Sex = nsex,
+		Edad = nedad
 	WHERE Id = uid;
 
 	UPDATE Location 

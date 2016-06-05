@@ -4,7 +4,8 @@ CREATE TABLE Users (
 	Alias text NOT NULL, 
 	PhotoProfile text, 
 	Email text NOT NULL, 
-	Sex char NOT NULL
+	Sex char NOT NULL,
+	Edad int NOT NULL DEFAULT 20
 );
 
 CREATE TABLE Location (

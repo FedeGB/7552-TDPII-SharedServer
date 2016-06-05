@@ -32,14 +32,14 @@ INSERT INTO Interests (CategoryId, Name)
 VALUES(6, 'Backpacking');
 
 -- Insert default users
-INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex) 
-VALUES ('Janeth Doe', 'janedoe', null, 'janedoe@gmail.com', 'F');
-INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex) 
-VALUES ('John Doe', 'johndoe', null, 'john@gmail.com', 'M');
-INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex) 
-VALUES ('Michael Jackson', 'mijacksn', null, 'mijacksn@gmail.com', 'M');
-INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex) 
-VALUES ('Alexis Foobar', 'afoobar', null, 'afoobar@live.com', 'F');
+INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex, Edad) 
+VALUES ('Janeth Doe', 'janedoe', null, 'janedoe@gmail.com', 'F', 20);
+INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex, Edad) 
+VALUES ('John Doe', 'johndoe', null, 'john@gmail.com', 'M', 30);
+INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex, Edad) 
+VALUES ('Michael Jackson', 'mijacksn', null, 'mijacksn@gmail.com', 'M', 25);
+INSERT INTO Users (Name, Alias, PhotoProfile, Email, Sex, Edad) 
+VALUES ('Alexis Foobar', 'afoobar', null, 'afoobar@live.com', 'F', 21);
 
 INSERT INTO Location (UserId, LocationX, LocationY)
 VALUES (1, -34.5848097, -58.4051191);

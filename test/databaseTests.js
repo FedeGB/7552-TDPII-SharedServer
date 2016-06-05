@@ -41,6 +41,7 @@ describe('Database', function () {
                     photoProfile: img,
                     email: 'tbrady@gmail.com',
                     sex: 'M',
+                    edad: 19,
                     locationx: 31.11111,
                     locationy: 32.22222,
                     interests: [{
@@ -99,6 +100,7 @@ describe('Database', function () {
                 photoProfile: null,
                 email: 'pmanning@gmail.com',
                 sex: 'M',
+                edad: 18,
                 locationx: 31.11111,
                 locationy: 32.22222,
                 interests: [{
@@ -136,6 +138,7 @@ describe('Database', function () {
                 photoProfile: null,
                 email: 'tbrady@gmail.com',
                 sex: 'M',
+                edad: 29,
                 locationx: 31.11111,
                 locationy: 32.22222,
                 interests: [{
