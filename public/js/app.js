@@ -45,7 +45,7 @@ app.controller('loginController', function ($scope, $window, dbService, $mdToast
             }
             else {
                 $mdToast.show(
-                    $mdToast.simple("User not found")
+                    $mdToast.simple("Usuario no encontrado")
                         .position('top right')
                         .parent(angular.element('#bs-example-navbar-collapse-1'))
                         .theme('error-toast')
@@ -56,7 +56,7 @@ app.controller('loginController', function ($scope, $window, dbService, $mdToast
             $scope.submitted = false;
             self.username = '';
             $mdToast.show(
-                $mdToast.simple("User not found")
+                $mdToast.simple("Usuario no encontrado")
                     .position('top right')
                     .parent(angular.element('#bs-example-navbar-collapse-1'))
                     .theme('error-toast')

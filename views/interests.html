@@ -105,7 +105,10 @@
                             </md-input-container>
                         </div>
                         <div layout="column" layout-align="start" layout-margin flex="10">
-                            <md-button ng-disabled="!newInterest.$valid || submitted" ng-click="interestsCtrl.submit()" class="md-raised md-primary">{{submitButtonText}}</md-button>
+                            <md-button ng-disabled="!newInterest.$valid || submitted" ng-click="interestsCtrl.submit()" class="md-raised md-primary">
+                                <i ng-show="submitted" class="fa fa-spinner fa-spin"></i>
+                                {{submitButtonText}}
+                            </md-button>
                         </div>
                     </div>
                 </md-content>
