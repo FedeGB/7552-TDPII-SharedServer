@@ -166,88 +166,96 @@ Cuando se hayan completado todos los campos, se dé click en *Enviar* nuevamente
 
 Para ir al listado de usuarios, sólo tiene que dar click a la opción **Usuarios** en la barra de navegación antes mostrada:
 
-<img src="http://i.imgur.com/3TSVjkD.png" width=600 />
+<img src="http://i.imgur.com/mzD02aH.png" width=600 />
 
 Se lo redirigirá a la siguiente página, donde verá el listado de los usuarios activos de la aplicación
 
-<img src="http://i.imgur.com/0AyMzbE.png" width=600 />
+<img src="http://i.imgur.com/xPQsP8V.png" width=600 />
 
-En el listado verá el nombre completo del usuario, su alias en la aplicación entre paréntesis, y los botones de Edición (Edit) y Borrado (Remove). Para ver la información completa de un usuario, colocarse sobre el nombre y hacer click sobre él.
+En el listado verá el nombre completo del usuario, su alias en la aplicación entre paréntesis, y los botones de Edición (Editar) y Borrado (Borrar). Para ver la información completa de un usuario, colocarse sobre el nombre y hacer click sobre él.
 
-<img src="http://i.imgur.com/z6DlonL.png" width=600 />
+<img src="http://i.imgur.com/j0DxafY.png" width=600 />
 
 Se desplegará la información debajo del título, mostrando los datos y foto de perfil del usuario elegido, incluída su última localización (en forma de par latitud-longitud) y un listado de sus intereses:
 
-<img src="http://i.imgur.com/M2opPVx.png" width=600 />
+<img src="http://i.imgur.com/L2hbdLD.png" width=600 />
 
 ## Borrado de Usuarios
 
-Para borrar un usuario, basta con hacer click en el botón de *Remove* correspondiente a su entrada en el listado de usuarios:
+Para borrar un usuario, basta con hacer click en el botón *Borrar* correspondiente a su entrada en el listado de usuarios:
 
-<img src="http://i.imgur.com/ike25c0.png" width=600 />
+<img src="http://i.imgur.com/n2Cv3JR.png" width=600 />
 
-Mientras se intenta dar de baja, el botón quedará deshabilitado, mostrando un animación de carga y cambiando el texto a *Removing...*. Al finalizar, en caso de que se haya podido dar de baja al usuario, se refrescará el listado (que no incluirá al usuario dado de baja) y se mostrará un cartel indicando que la baja fue exitosa:
+Mientras se intenta dar de baja, el botón quedará deshabilitado, mostrando un animación de carga y cambiando el texto a *Removing...*.
 
-<img src="http://i.imgur.com/msle1Fq.png" width=600 />
+<img src="http://i.imgur.com/InRRI7z.png" width=600 />
+
+Al finalizar, en caso de que se haya podido dar de baja al usuario, se refrescará el listado (que no incluirá al usuario dado de baja) y se mostrará un cartel indicando que la baja fue exitosa:
+
+<img src="http://i.imgur.com/99BVV2s.png" width=600 />
 
 En caso contrario, se mostrará un mensaje similar, con fondo rojo y el mensaje de error correspondiente a la causa.
 
 ## Visualización y Edición de Usuarios
 
-Para editar los datos de un usuario, sólo es necesario hacer click sobre el botón *Edit* correspondiente a su entrada en el listado de usuarios:
+Para editar los datos de un usuario, sólo es necesario hacer click sobre el botón *Editar* correspondiente a su entrada en el listado de usuarios:
 
-<img src="http://i.imgur.com/Cvz85bh.png" width=600 />
+<img src="http://i.imgur.com/p2Xbw9Z.png" width=600 />
 
 Luego se redireccionará automáticamente al usuario a la página de ***Visualización y Edición de Usuario***, que es la misma que la de **Alta de Usuarios**, sólo que tendrá los datos cargados del usuario elegido. 
 
-<img src="http://i.imgur.com/1K4msAg.png" width=600 />
+<img src="http://i.imgur.com/LNLvri8.png" width=600 />
 
 Todos los campos son editables. Véase **Alta de Usuarios** para referencia de reglas de completado de formulario y envío del mismo. 
 
 ## Listado de Intereses
 
-Para ir al listado de intereses, sólo tiene que dar click en la opción **Interests** de la barra de navegación
+Para ir al listado de intereses, sólo tiene que dar click en la opción **Intereses** de la barra de navegación
 
-<img src="http://i.imgur.com/LpI5EbU.png" width=400 />
+<img src="http://i.imgur.com/dkisW0d.png" width=400 />
 
 Se lo redireccionará automáticamente a la página de listado y alta de intereses:
 
-<img src="http://i.imgur.com/kIFSRq6.png" width=600 />
+<img src="http://i.imgur.com/lTJkrOD.png" width=600 />
 
 Puede ver un listado de las categorías disponibles. Para ver cada uno de los intereses pertenecientes a cada categoría, haga click sobre el nombre de la categoría, lo que desplegará el listado:
 
-<img src="http://i.imgur.com/R0T88rc.png" width=600 />
+<img src="http://i.imgur.com/b5eI2Yv.png" width=600 />
 
 ## Alta de Intereses
 
 En la misma página de **Listado de Intereses**, puede verse la sección de **Alta de Interés**:
 
-<img src="http://i.imgur.com/xfFrEVg.png" width=600 />
+<img src="http://i.imgur.com/GsopAVI.png" width=600 />
 
-Observar que inicialmente el botón *Submit* está deshabilitado. Para habilitarlo, se deben completar los campos *Interest* (campo de texto, nombre del interés a agregar) y *Category* (campo de selección, nombre de la categoría a la que pertenece el interés).
+Observar que inicialmente el botón *Enviar* está deshabilitado. Para habilitarlo, se deben completar los campos *Interés* (campo de texto, nombre del interés a agregar) y *Categoría* (campo de selección, nombre de la categoría a la que pertenece el interés).
 
-Si se hace click sobre el campo *Interest* y luego se quita el foco sobre él sin haberlo completado, aparecerá un mensaje que recordará que el campo es obligatorio:
+Si se hace click sobre el campo *Interés* y luego se quita el foco sobre él sin haberlo completado, aparecerá un mensaje que recordará que el campo es obligatorio:
 
-<img src="http://i.imgur.com/8AkUSYp.png" width=400 />
+<img src="http://i.imgur.com/FsuiV6W.png" width=400 />
 
 Para elegir una categoría, se debe hacer click sobre el campo de selección, lo que desplegará un listado de las categorías disponibles:
 
-<img src="http://i.imgur.com/A6YxCED.png" width=400 />
+<img src="http://i.imgur.com/r95PoPa.png" width=400 />
 
 Si no se selecciona ninguna categoría, aparecerá un mensaje recordando que el campo es obligatorio
 
-<img src="http://i.imgur.com/I9CwNrc.png" width=400 />
+<img src="http://i.imgur.com/wkqPcAO.png" width=400 />
 
-Una vez que se hayan completado los campos, se habilitará el botón *Submit*:
+Una vez que se hayan completado los campos, se habilitará el botón *Enviar*:
 
-<img src="http://i.imgur.com/A7kduRc.png" width=600 />
+<img src="http://i.imgur.com/lJgighh.png" width=600 />
 
-Al dar click a *Submit*, se enviará el alta de interés. En el intermedio, se deshabilitará nuevamente el botón *Submit*, cambiando su mensaje a *Loading...* y se mostrará una animación de carga. Si el alta fue correcta, se mostrará un mensaje de éxito:
+Al dar click a *Enviar*, se enviará el alta de interés. En el intermedio, se deshabilitará nuevamente el botón *Enviar*, cambiando su mensaje a *Cargando...* y se mostrará una animación de carga. 
 
-<img src="http://i.imgur.com/f0OGeYa.png" width=600 />
+<img src="http://i.imgur.com/Wqip3jJ.png" width=600 />
+
+Si el alta fue correcta, se mostrará un mensaje de éxito:
+
+<img src="http://i.imgur.com/rFvvFfU.png" width=600 />
 
 Se refrescará el listado de intereses, por lo que aparecerá el nuevo interés dentro de la categoría seleccionada:
 
-<img src="http://i.imgur.com/GVnRbNA.png" width=600 />
+<img src="http://i.imgur.com/8zRcOXH.png" width=600 />
 
 
