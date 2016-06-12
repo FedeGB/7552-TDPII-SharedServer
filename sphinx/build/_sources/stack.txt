@@ -1,0 +1,21 @@
+Stack
+=========================================
+
+El SharedServer utiliza las siguientes tecnologías:
+
+- `PostgreSQL`_, como motor de base de datos
+- `NodeJS`, como runtime environment
+- `ExpressJS`, como framework del server de la aplicación web
+- `AngularJS`, como framework del cliente de la aplicación web
+- `Bootstrap` y `Angular Material` como frameworks de UI/UX
+
+.. _PostgreSQL: https://www.postgresql.org/
+.. _NodeJS: https://nodejs.org/
+.. _ExpressJS: https://expressjs.com/
+.. _AngularJS: https://angularjs.org/
+.. _Bootstrap: https://getbootstrap.com/
+.. _Angular Material: https://material.angularjs.org/
+
+El siguiente diagrama muestra la arquitectura de la aplicación, y cómo interactúan estas tecnologías:
+
+.. image:: SharedServerStack.png
