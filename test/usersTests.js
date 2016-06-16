@@ -176,7 +176,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady2@gmail.com',
                     sex: 'M',
-                    edad: 22,
+                    age: 22,
                     location: { latitude: 31.11111, longitude: 32.22222 },
                     interests: [{
                         category: "sex",
@@ -265,7 +265,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady4@gmail.com',
                     sex: 'M',
-                    edad: 55,
+                    age: 55,
                     interests: [{
                         category: "sex",
                         value: "man"
@@ -314,7 +314,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady5@gmail.com',
                     sex: 'M',
-                    edad: 33,
+                    age: 33,
                     interests: [{
                         category: "oidfjosijdfoisjdf",
                         value: "dfdfdfdfdf"
@@ -391,7 +391,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady222@gmail.com',
                     sex: 'M',
-                    edad: 52,
+                    age: 52,
                     interests: [{
                         category: "sex",
                         value: "man"
@@ -429,7 +429,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'janedoe@gmail.com',
                     sex: 'M',
-                    edad: 19,
+                    age: 19,
                     interests: [{
                         category: "sex",
                         value: "man"
@@ -470,7 +470,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady5@gmail.com',
                     sex: 'M',
-                    edad: 18,
+                    age: 18,
                     location: { latitude: 31.11111, longitude: 32.22222 },
                     interests: [{
                         category: "sex",
@@ -510,7 +510,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady55@gmail.com',
                     sex: 'M',
-                    edad: 21,
+                    age: 21,
                     location: { latitude: 31.11111, longitude: 32.22222 },
                     interests: [{
                         category: "sex",
@@ -601,7 +601,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady7@gmail.com',
                     sex: 'M',
-                    edad: 20,
+                    age: 20,
                     interests: [{
                         category: "sex",
                         value: "man"
@@ -651,7 +651,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady8@gmail.com',
                     sex: 'M',
-                    edad: 43,
+                    age: 43,
                     interests: [{
                         category: "oidfjosijdfoisjdf",
                         value: "dfdfdfdfdf"
@@ -692,7 +692,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'janedoe@gmail.com',
                     sex: 'M',
-                    edad: 34,
+                    age: 34,
                     interests: [{
                         category: "sex",
                         value: "man"
@@ -731,7 +731,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady222@gmail.com',
                     sex: 'M',
-                    edad: 20,
+                    age: 20,
                     interests: [{
                         category: "sex",
                         value: "man"
@@ -770,7 +770,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'janedoe@gmail.com',
                     sex: 'M',
-                    edad: 19,
+                    age: 19,
                     interests: [{
                         category: "sex",
                         value: "man"
@@ -825,7 +825,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'fjdjfdjf@gmail.com',
                     sex: 'M',
-                    edad: 21,
+                    age: 21,
                     interests: [{
                         category: "sex",
                         value: "man"
@@ -872,7 +872,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'fjdjfdjf@gmail.com',
                     sex: 'M',
-                    edad: 19,
+                    age: 19,
                     interests: [{
                         category: "sex",
                         value: "man"
