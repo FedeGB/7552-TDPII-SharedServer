@@ -54,7 +54,7 @@ describe('Users', function () {
                         expect(user).to.have.property('alias');
                         expect(user).to.have.property('email');
                         expect(user).to.have.property('sex');
-                        expect(user).to.have.property('edad');
+                        expect(user).to.have.property('age');
                         expect(user).to.have.property('photo_profile');
                         expect(user).to.have.property('location');
                         expect(user).to.have.property('interests');
@@ -145,7 +145,7 @@ describe('Users', function () {
                     expect(res.body.user).to.have.property('alias');
                     expect(res.body.user).to.have.property('email');
                     expect(res.body.user).to.have.property('sex');
-                    expect(res.body.user).to.have.property('edad');
+                    expect(res.body.user).to.have.property('age');
                     expect(res.body.user).to.have.property('photo_profile');
                     expect(res.body.user).to.have.property('location');
                     expect(res.body.user).to.have.property('interests');
@@ -215,7 +215,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady3@gmail.com',
                     sex: 'M',
-                    edad: 33,
+                    age: 33,
                     location: { latitude: 31.11111, longitude: 32.22222 },
                     interests: [{
                         category: "sex",
@@ -550,7 +550,7 @@ describe('Users', function () {
                     photoProfile: null,
                     email: 'tbrady6@gmail.com',
                     sex: 'M',
-                    edad: 22,
+                    age: 22,
                     location: { latitude: 31.11111, longitude: 32.22222 },
                     interests: [{
                         category: "sex",
