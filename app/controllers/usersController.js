@@ -150,7 +150,7 @@ module.exports = function () {
         mappedUser.photo_profile = user.photoprofile;
         mappedUser.email = user.email;
         mappedUser.sex = user.sex;
-        mappedUser.edad = user.edad;
+        mappedUser.edad = user.age;
         if (user.location) {
             mappedUser.locationx = user.location.longitude;
             mappedUser.locationy = user.location.latitude;
@@ -176,7 +176,7 @@ module.exports = function () {
         mappedUser.photo_profile = user.photoprofile;
         mappedUser.email = user.email;
         mappedUser.sex = user.sex;
-        mappedUser.edad = user.edad;
+        mappedUser.age = user.edad;
         mappedUser.location = {
             latitude: user.locationy,
             longitude: user.locationx
