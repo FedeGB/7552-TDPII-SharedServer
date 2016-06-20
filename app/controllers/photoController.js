@@ -11,11 +11,8 @@ module.exports = function () {
     
     self.updatePhoto = function (req, res) {
         res.setHeader('Content-Type', 'application/json');
-        var id = req.params.id;
-        var photo = req.body.photo;
         db.updatePhoto(req.params.id, req.body.photo).then(function (data) {
-            // res.status(200).send({ id: data[0].updatephoto });
-            res.status(200).send({ sentId: id, sentPhoto: photo });
+            res.status(200).send({ id: data[0].updatephoto });
         });
     };
 

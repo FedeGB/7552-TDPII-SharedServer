@@ -40,7 +40,7 @@ describe('Photos', function () {
                            return done(err);
                        }
                        expect(err).to.equal(null);
-                       // expect(res.body.id).to.not.be.undefined;
+                       expect(res.body.id).to.not.be.undefined;
                        done();
                    });
            });
@@ -58,7 +58,7 @@ describe('Photos', function () {
                            return done(err);
                        }
                        expect(err).to.equal(null);
-                       // expect(res.body.id).to.not.be.undefined;
+                       expect(res.body.id).to.not.be.undefined;
                        request(app)
                            .get('/users/' + 2)
                            .expect(200)
